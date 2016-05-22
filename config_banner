@@ -30,7 +30,7 @@
       provider: "{{ provider }}"
       authorize: yes
       lines:
-        - banner motd ^CWelcome to the 2 day CCNA boot camp^C
+        - banner motd ^Welcome to the 2 day CCNA boot camp^
  
   - name: SHOW RUN | BEG BANNER
     ios_command:
