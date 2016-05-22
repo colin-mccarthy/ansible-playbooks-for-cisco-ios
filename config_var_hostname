@@ -1,0 +1,43 @@
+
+---
+- hosts: ios
+  gather_facts: no
+  connection: local
+ 
+  tasks:
+  - name: OBTAIN LOGIN CREDENTIALS
+    include_vars: secrets.yaml
+ 
+  - name: DEFINE PROVIDER
+    set_fact:
+      provider:
+        host: "{{ inventory_hostname }}"
+        username: "{{ creds['username'] }}"
+        password: "{{ creds['password'] }}"
+        auth_pass: "{{ creds['auth_pass'] }}"
+ 
+  - name: RUN 'SHOW RUN'
+    ios_command:
+      provider: "{{ provider }}"
+      commands:
+        - show run 
+    register: before_base
+ 
+  - debug: var=before_base.stdout_lines
+ 
+  
+  - name: ASSIGN HOSTNAME
+    ios_config:
+      provider: "{{ provider }}"
+      authorize: yes
+      lines: ['hostname {{ new_hostname }}'] 
+      force: yes
+ 
+  - name: RUN 'SHOW RUN'
+    ios_command:
+      provider: "{{ provider }}"
+      commands:
+        - show run 
+    register: after_base
+ 
+  - debug: var=after_base.stdout_lines
