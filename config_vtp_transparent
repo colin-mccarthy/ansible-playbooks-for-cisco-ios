@@ -1,0 +1,43 @@
+
+---
+- hosts: ios
+  gather_facts: no
+  connection: local
+ 
+  tasks:
+  - name: OBTAIN LOGIN CREDENTIALS
+    include_vars: secrets.yaml
+ 
+  - name: DEFINE PROVIDER
+    set_fact:
+      provider:
+        host: "{{ inventory_hostname }}"
+        username: "{{ creds['username'] }}"
+        password: "{{ creds['password'] }}"
+        auth_pass: "{{ creds['auth_pass'] }}"
+ 
+  - name: SHOW VTP STATUS
+    ios_command:
+      provider: "{{ provider }}"
+      commands:
+        - show vtp status
+    register: before_vtp
+ 
+  - debug: var=before_vtp.stdout_lines
+ 
+  - name: CHANGE VTP MODE
+    ios_config:
+      provider: "{{ provider }}"
+      authorize: yes
+      lines:
+        - vtp mode transparent
+      
+ 
+  - name: SHOW VTP STATUS
+    ios_command:
+      provider: "{{ provider }}"
+      commands:
+        - show vtp status 
+    register: after_vtp
+ 
+  - debug: var=after_vtp.stdout_lines
