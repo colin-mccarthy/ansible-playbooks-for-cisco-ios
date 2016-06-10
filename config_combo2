@@ -1,3 +1,16 @@
+#Cisco IOS 12.2 Hardening Playbook
+#
+#+ no service pad
+#+ ip ssh version 2
+#+ no ip domain-lookup
+#+ no ip http server
+#+ no ip http secure-server
+#+ no cdp run
+#+ transport input ssh
+#+ logging buffered 15000
+#+ service password-encryption
+
+
 - hosts: ios
   gather_facts: no
   connection: local
