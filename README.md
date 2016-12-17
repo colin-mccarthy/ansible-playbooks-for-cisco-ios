@@ -9,7 +9,7 @@ To use, download the .zip and extract the contents or clone the repository by ty
 
 git clone https://github.com/colin-mccarthy/Ansible-Playbooks-for-Cisco-IOS.git
 
-There is a video series that details how to use Ansible for Cisco IOS device that can be found at my website here
+There is a video series that details how to use Ansible for Cisco IOS devices that can be found at my website here
 
 http://www.thenetwork.engineer/ansible-video-course
 
