@@ -13,3 +13,6 @@ There is a video series that details how to use Ansible for Cisco IOS devices th
 
 http://www.thenetwork.engineer/ansible-video-course
 
+
+*These playbooks are written with a user that has privledge level 15 on the Cisco device. If your user requires typing enable to reach priveledge exec, you will need to add that to your playbooks.
+
