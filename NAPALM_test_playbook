@@ -16,6 +16,7 @@
         auth_pass: "{{ creds['auth_pass'] }}"
         transport: cli
 
+
 - name: "create a diff"
     napalm_install_config:
       hostname: "{{ inventory_hostname }}"
