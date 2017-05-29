@@ -14,7 +14,7 @@ There is a video series that details how to use Ansible for Cisco IOS devices th
 https://www.thenetwork.engineer
 
 
-*These playbooks are written for a user with privledge level 15 if your user requires enable mode command then you need to  write that into the playbook.
+
 
 
 
