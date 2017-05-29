@@ -19,6 +19,7 @@
   - name: SHOW VTP STATUS
     ios_command:
       provider: "{{ provider }}"
+      authorize: yes
       commands:
         - show vtp status
     register: before_vtp
@@ -36,6 +37,7 @@
   - name: SHOW VTP STATUS
     ios_command:
       provider: "{{ provider }}"
+      authorize: yes
       commands:
         - show vtp status 
     register: after_vtp
