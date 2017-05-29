@@ -30,6 +30,7 @@
   - name: SHOW RUN | BEG VTY
     ios_command:
       provider: "{{ provider }}"
+      authorize: yes
       commands:
         - show run | beg vty
     register: before_vty
@@ -97,6 +98,7 @@
   - name: SHOW RUN | BEG VTY
     ios_command:
       provider: "{{ provider }}"
+      authorize: yes
       commands:
         - show run | beg vty
     register: after_vty
