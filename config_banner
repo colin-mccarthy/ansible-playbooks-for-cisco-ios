@@ -19,6 +19,7 @@
   - name: SHOW RUN | BEG BANNER
     ios_command:
       provider: "{{ provider }}"
+      authorize: yes
       commands:
         - show run | beg banner
     register: banner
@@ -35,6 +36,7 @@
   - name: SHOW RUN | BEG BANNER
     ios_command:
       provider: "{{ provider }}"
+      authorize: yes
       commands:
         - show run | beg banner 
     register: banner
