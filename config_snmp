@@ -21,6 +21,7 @@
   - name: SHOW RUN | INC SNMP
     ios_command:
       provider: "{{ provider }}"
+      authorize: yes
       commands:
         - show run | i snmp
     register: before_snmp
@@ -74,6 +75,7 @@
   - name: SHOW RUN | INC SNMP
     ios_command:
       provider: "{{ provider }}"
+      authorize: yes
       commands:
         - show run | i snmp
     register: after_snmp
