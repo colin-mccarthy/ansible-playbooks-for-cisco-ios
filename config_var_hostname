@@ -19,6 +19,7 @@
   - name: RUN 'SHOW RUN'
     ios_command:
       provider: "{{ provider }}"
+      authorize: yes
       commands:
         - show run 
     register: before_base
@@ -36,6 +37,7 @@
   - name: RUN 'SHOW RUN'
     ios_command:
       provider: "{{ provider }}"
+      authorize: yes
       commands:
         - show run 
     register: after_base
