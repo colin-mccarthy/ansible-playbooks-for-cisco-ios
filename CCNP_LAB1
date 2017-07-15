@@ -1,0 +1,144 @@
+---
+
+- hosts: iso
+
+ gather_facts: no
+
+ connection: local
+
+ 
+
+ tasks:
+
+ - name: OBTAIN LOGIN CREDENTIALS
+
+  include_vars: secrets.yaml
+
+ 
+
+ - name: DEFINE PROVIDER
+
+  set_fact:
+
+   provider:
+
+    host: "{{ inventory_hostname }}"
+
+    username: "{{ creds['username'] }}"
+
+    password: "{{ creds['password'] }}"
+
+    auth_pass: "{{ creds['auth_pass'] }}"
+
+ 
+
+ 
+
+  
+
+ - name: RTR2 OSPF+Router ID
+
+  ios_config:
+
+   provider: "{{ provider }}"
+
+   authorize: yes
+
+   lines:
+
+    - router-id 2.2.2.2
+
+    - log-adjacency-changes
+
+    - network 10.1.2.0 0.0.0.255 area 0
+
+    - network 10.1.12.0 0.0.0.255 area 0
+
+    - network 10.1.23.0 0.0.0.255 area 23
+
+   parents: router ospf 1 
+
+
+
+
+
+ - name: RTR2 lo2 base configs
+
+  ios_config:
+
+   provider: "{{ provider }}"
+
+   authorize: yes
+
+   lines:
+
+    - des Marketing
+
+    - ip address 10.1.2.1 255.255.255.0
+
+    - ip ospf network point-to-point
+
+   parents: int lo2
+
+
+
+ 
+
+ - name: RTR2 fa0/3 base configs
+
+  ios_config: 
+
+   provider: "{{ provider }}"
+
+   authorize: yes
+
+   lines:
+
+    - no sw
+
+    - ip address 10.1.23.2 255.255.255.0
+
+   parents: int fa0/3
+
+
+
+ 
+
+ - name: RTR2 fa0/2 base configs
+
+  ios_config:
+
+   provider: "{{ provider }}"
+
+   authorize: yes
+
+   lines:
+
+    - des R1 int fa0/2 inter-connect
+
+    - no sw
+
+    - ip address 10.1.12.2 255.255.255.0
+
+   parents: int fa0/2
+
+
+
+
+
+ - name: RUN 'SHOW RUN'
+
+  ios_command:
+
+   provider: "{{ provider }}"
+
+   commands:
+
+    - show run 
+
+  register: after_base
+
+ 
+
+ - debug: var=after_base.stdout_lines
+
