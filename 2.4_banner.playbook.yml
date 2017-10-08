@@ -27,6 +27,8 @@
 
   - name: Configure banner from file
     ios_banner:
+      provider: "{{ provider }}"
+      authorize: yes
       banner:  motd
       text: "{{ lookup('file', './raw_banner.cfg') }}"
       state: present
