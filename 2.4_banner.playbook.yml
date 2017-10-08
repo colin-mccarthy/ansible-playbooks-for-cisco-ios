@@ -34,7 +34,7 @@
       state: present
 
   - name: SHOW RUN | BEG BANNER
-    ios_command:i
+    ios_command:
       provider: "{{ provider }}"
       authorize: yes
       commands:
