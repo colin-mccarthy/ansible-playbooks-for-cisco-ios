@@ -29,7 +29,7 @@
     ios_banner:
       provider: "{{ provider }}"
       authorize: yes
-      banner:  motd
+      banner: login
       text: "{{ lookup('file', './raw_banner.cfg') }}"
       state: present
 
