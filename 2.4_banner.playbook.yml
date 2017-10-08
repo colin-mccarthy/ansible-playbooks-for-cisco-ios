@@ -1,0 +1,42 @@
+---
+- hosts: ios
+  gather_facts: no
+  connection: local
+
+  tasks:
+  - name: OBTAIN LOGIN CREDENTIALS
+    include_vars: secrets.yaml
+
+  - name: DEFINE PROVIDER
+    set_fact:
+      provider:
+        host: "{{ inventory_hostname }}"
+        username: "{{ creds['username'] }}"
+        password: "{{ creds['password'] }}"
+        auth_pass: "{{ creds['auth_pass'] }}"
+
+  - name: SHOW RUN | BEG BANNER
+    ios_command:
+      provider: "{{ provider }}"
+      authorize: yes
+      commands:
+        - show run | beg banner
+    register: banner
+
+  - debug: var=banner.stdout_lines
+
+  - name: Configure banner from file
+    ios_banner:
+      banner:  motd
+      text: "{{ lookup('file', './raw_banner.cfg') }}"
+      state: present
+
+  - name: SHOW RUN | BEG BANNER
+    ios_command:i
+      provider: "{{ provider }}"
+      authorize: yes
+      commands:
+        - show run | beg banner
+    register: banner
+
+  - debug: var=banner.stdout_lines
