@@ -30,7 +30,7 @@
       provider: "{{ provider }}"
       authorize: yes
       banner: login
-      text: "{{ lookup('file', './raw_banner.cfg') }}"
+      text: "{{ lookup('file', './vars/raw_banner.cfg') }}"
       state: present
 
   - name: SHOW RUN | BEG BANNER
