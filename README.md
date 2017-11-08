@@ -18,7 +18,7 @@ https://www.thenetwork.engineer
 Best Practices:
 
 Always name your playbooks with a .yml at the end. This is required if you ever want to use your playbooks with Ansible Tower.
-(So you might as well start off with a naming convention that is "scalable" to use with Tower.)
+(So you might as well start off with a naming convention that works with Tower.)
 
 
 
