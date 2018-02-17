@@ -1,0 +1,218 @@
+Building configuration...
+
+Current configuration : 5442 bytes
+!
+version 12.2
+service nagle
+no service pad
+service timestamps debug datetime localtime
+service timestamps log datetime localtime
+service password-encryption
+!
+hostname R3
+!
+boot-start-marker
+boot-end-marker
+!
+logging buffered 15000
+logging console critical
+logging monitor warnings
+!
+username pi privilege 15 password 7 01100F175804
+username colin privilege 15 secret 5 $1$ny/R$9.RSWmlKgwp7EffqgOeb8.
+!
+!
+aaa new-model
+!
+!
+aaa authentication login default group tacacs+ local
+aaa authentication enable default group tacacs+ enable
+aaa authorization config-commands
+aaa authorization exec default group tacacs+ local 
+aaa authorization commands 1 default group tacacs+ none 
+aaa authorization commands 15 default group tacacs+ none 
+aaa accounting exec default start-stop group tacacs+
+aaa accounting network default start-stop group tacacs+
+aaa accounting connection default start-stop group tacacs+
+aaa accounting system default start-stop group tacacs+
+!
+!
+!
+aaa session-id common
+clock timezone MST -7
+clock summer-time MDT recurring
+system mtu routing 1500
+vtp mode transparent
+ip routing
+no ip domain-lookup
+ip domain-name foo.com
+ip name-server 8.8.8.8
+ip name-server 8.8.4.4
+ip name-server 8.8.9.9
+!
+!
+login on-failure log every 5
+login on-success log
+!
+!
+crypto pki trustpoint TP-self-signed-109801216
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-109801216
+ revocation-check none
+ rsakeypair TP-self-signed-109801216
+!
+!
+crypto pki certificate chain TP-self-signed-109801216
+ certificate self-signed 01
+  3082024C 308201B5 A0030201 02020101 300D0609 2A864886 F70D0101 04050030 
+  30312E30 2C060355 04031325 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 31303938 30313231 36301E17 0D393330 33303130 30303133 
+  315A170D 32303031 30313030 30303030 5A303031 2E302C06 03550403 1325494F 
+  532D5365 6C662D53 69676E65 642D4365 72746966 69636174 652D3130 39383031 
+  32313630 819F300D 06092A86 4886F70D 01010105 0003818D 00308189 02818100 
+  AB5D5D2E 57C7D077 C771C3BB 748498E0 686AF55D 1BD56777 54050D82 D75FBA16 
+  C891CB89 56C85C46 9550CBFE 124C6129 D6DE19CE DEB62889 55F04CC9 8972B1AB 
+  70ED67B3 773A46F8 322E6778 80C9FC44 1E09DD76 7576B54D B529F950 64B6BEAF 
+  20249026 738CB405 C9F5D454 01165D93 5077ACEB 1698B41D 3ACE6A8C 53671FE5 
+  02030100 01A37630 74300F06 03551D13 0101FF04 05300301 01FF3021 0603551D 
+  11041A30 18821652 332E7468 656E6574 776F726B 2E656E67 696E6565 72301F06 
+  03551D23 04183016 80141C34 1BF03BEC 2289EDBA 87ED81FA 5D7889E6 49ED301D 
+  0603551D 0E041604 141C341B F03BEC22 89EDBA87 ED81FA5D 7889E649 ED300D06 
+  092A8648 86F70D01 01040500 03818100 91D82DD2 824B16BD BF77BB27 4EFE1A35 
+  E46224F3 6850E755 50D6EF6B F1FF7FBB 5332913D 892BFB6E 1EC6EF15 E0027F2B 
+  12A01FC4 A57382CC F4A02F98 D14F27E1 5D466051 9EB00EA9 48939F10 405CA517 
+  E897A074 3EF903F6 F5F5BD0A E9BF36F9 9FCDAF36 801728C8 7CEBFE86 D5396002 
+  A2A2707C 99FE3A74 089607A5 4896EEC3
+  quit
+!
+!
+!
+port-channel load-balance src-dst-ip
+archive
+ log config
+  logging enable
+  logging size 300
+  notify syslog contenttype plaintext
+  hidekeys
+!
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+ip ssh time-out 60
+ip ssh version 2
+ip scp server enable
+!
+!
+!
+interface Loopback0
+ no ip address
+!
+interface GigabitEthernet0/1
+ no switchport
+ ip address 192.168.161.15 255.255.255.0
+!
+interface GigabitEthernet0/2
+!
+interface GigabitEthernet0/3
+!
+interface GigabitEthernet0/4
+!
+interface GigabitEthernet0/5
+!
+interface GigabitEthernet0/6
+!
+interface GigabitEthernet0/7
+!
+interface GigabitEthernet0/8
+!
+interface GigabitEthernet0/9
+!
+interface GigabitEthernet0/10
+!
+interface GigabitEthernet0/11
+!
+interface GigabitEthernet0/12
+!
+interface GigabitEthernet0/13
+!
+interface GigabitEthernet0/14
+!
+interface GigabitEthernet0/15
+!
+interface GigabitEthernet0/16
+!
+interface GigabitEthernet0/17
+!
+interface GigabitEthernet0/18
+!
+interface GigabitEthernet0/19
+!
+interface GigabitEthernet0/20
+!
+interface GigabitEthernet0/21
+!
+interface GigabitEthernet0/22
+!
+interface GigabitEthernet0/23
+!
+interface GigabitEthernet0/24
+!
+interface GigabitEthernet0/25
+!
+interface GigabitEthernet0/26
+!
+interface GigabitEthernet0/27
+!
+interface GigabitEthernet0/28
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+no ip http server
+no ip http secure-server
+!
+!
+ip access-list extended test
+!
+ip sla enable reaction-alerts
+logging source-interface Loopback0
+logging 8.8.8.8
+logging 8.8.4.4
+no cdp run
+!
+snmp-server community ansibull RO 99
+snmp-server trap-source Loopback0
+snmp-server contact noc@yourcompany.com
+snmp-server enable traps ospf state-change
+snmp-server enable traps ospf errors
+snmp-server enable traps ospf retransmit
+snmp-server enable traps ospf lsa
+snmp-server enable traps ospf ********-specific state-change nssa-trans-change
+snmp-server enable traps ospf ********-specific state-change shamlink interface
+snmp-server enable traps ospf ********-specific state-change shamlink neighbor
+snmp-server enable traps ospf ********-specific errors
+snmp-server enable traps ospf ********-specific retransmit
+snmp-server enable traps ospf ********-specific lsa
+snmp-server host 8.8.8.8 ansibull 
+!
+!
+line con 0
+ logging synchronous
+line vty 0 4
+ exec-timeout 60 0
+ privilege level 15
+ transport input ssh
+ transport output ssh
+line vty 5 15
+ exec-timeout 60 0
+ privilege level 15
+ transport input ssh
+ transport output ssh
+!
+ntp source Loopback0
+ntp server 8.8.8.8 prefer
+end
