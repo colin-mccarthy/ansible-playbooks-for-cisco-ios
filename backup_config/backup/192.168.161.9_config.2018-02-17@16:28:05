@@ -1,0 +1,232 @@
+Building configuration...
+
+Current configuration : 6067 bytes
+!
+version 12.2
+service nagle
+no service pad
+service timestamps debug datetime localtime
+service timestamps log datetime localtime
+service password-encryption
+!
+hostname R1
+!
+logging buffered 15000
+logging console critical
+logging monitor warnings
+!
+username pi privilege 15 password 7 00071A150754
+username colin privilege 15 secret 5 $1$CFgK$aj2J4K.JztFlrq6gqAgKS0
+aaa new-model
+!
+!
+aaa authentication login default group tacacs+ local
+aaa authentication enable default group tacacs+ enable
+aaa authorization config-commands
+aaa authorization exec default group tacacs+ local 
+aaa authorization commands 1 default group tacacs+ none 
+aaa authorization commands 15 default group tacacs+ none 
+aaa accounting exec default start-stop group tacacs+
+aaa accounting network default start-stop group tacacs+
+aaa accounting connection default start-stop group tacacs+
+aaa accounting system default start-stop group tacacs+
+!
+!
+!
+aaa session-id common
+clock timezone MST -7
+clock summer-time MDT recurring
+ip subnet-zero
+ip routing
+no ip domain-lookup
+ip domain-name foo.com
+ip name-server 8.8.8.8
+ip name-server 8.8.4.4
+ip name-server 8.8.9.9
+!
+login on-failure log every 5
+login on-success log
+vtp mode transparent
+!
+!
+crypto pki trustpoint TP-self-signed-3199503232
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-3199503232
+ revocation-check none
+ rsakeypair TP-self-signed-3199503232
+!
+!
+crypto pki certificate chain TP-self-signed-3199503232
+ certificate self-signed 01
+  3082024E 308201B7 A0030201 02020101 300D0609 2A864886 F70D0101 04050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 33313939 35303332 3332301E 170D3933 30333031 30303030 
+  35395A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D33 31393935 
+  30333233 3230819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 
+  8100BB8B F72CA5FF AB395A0A 35B4E317 3043D136 1F56E59A 0753A40C 57BF65F0 
+  47CEB765 83C5C685 FF467358 B8A5B3EE EFE4648B 703ECB1C F3F6B380 0115791C 
+  54DF990F 0CE71BCA F2059331 2CA0429E 2E976354 C4D28A7A 0DB071F0 57E4D453 
+  7B811AE0 28C6D2F7 5992FBFF 2021A548 0B2E47FD ABE17C16 78AC5166 25C0877C 
+  7ED30203 010001A3 76307430 0F060355 1D130101 FF040530 030101FF 30210603 
+  551D1104 1A301882 1652312E 7468656E 6574776F 726B2E65 6E67696E 65657230 
+  1F060355 1D230418 30168014 FECE506F E6969CBF FD95E4E1 4FEA8768 F84C778B 
+  301D0603 551D0E04 160414FE CE506FE6 969CBFFD 95E4E14F EA8768F8 4C778B30 
+  0D06092A 864886F7 0D010104 05000381 8100B313 D02F27C1 F52F38C3 BDED575C 
+  3428D4A7 1F75745C A6206699 8497E65C 03914796 C13FE701 B9E8EC77 F91B1387 
+  6D634ED9 03046C41 E7EFE3AC 57358610 B99E6C2B 658274C9 24FF0BBD 0E384BDC 
+  9BE343F4 744ED266 15FFC689 6D99BCA2 8096E1BC 313217DC 7E81E5A2 91FF21A6 
+  B3061869 EC001B3C C8DF76C2 333F57AA 2FBF
+  quit
+!
+!
+archive
+ log config
+  logging enable
+  notify syslog contenttype plaintext
+  hidekeys
+!
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+ip ssh time-out 60
+ip ssh version 2
+ip scp server enable
+!
+! 
+!
+!
+!
+interface Loopback0
+ no ip address
+!
+interface FastEthernet0/1
+ no switchport
+ ip address 192.168.161.9 255.255.255.0
+!
+interface FastEthernet0/2
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/3
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/4
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/5
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/6
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/7
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/8
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/9
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/10
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/11
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/12
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/13
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/14
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/15
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/16
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/17
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/18
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/19
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/20
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/21
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/22
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/23
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/24
+ switchport mode dynamic desirable
+!
+interface GigabitEthernet0/1
+ switchport mode dynamic desirable
+!
+interface GigabitEthernet0/2
+ switchport mode dynamic desirable
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+no ip http server
+no ip http secure-server
+!
+!
+ip access-list extended test
+!
+logging source-interface Loopback0
+logging 8.8.8.8
+logging 8.8.4.4
+no cdp run
+snmp-server community ansibull RO 99
+snmp-server trap-source Loopback0
+snmp-server contact noc@yourcompany.com
+snmp-server enable traps ospf state-change
+snmp-server enable traps ospf errors
+snmp-server enable traps ospf retransmit
+snmp-server enable traps ospf lsa
+snmp-server enable traps ospf ********-specific state-change nssa-trans-change
+snmp-server enable traps ospf ********-specific state-change shamlink interface
+snmp-server enable traps ospf ********-specific state-change shamlink neighbor
+snmp-server enable traps ospf ********-specific errors
+snmp-server enable traps ospf ********-specific retransmit
+snmp-server enable traps ospf ********-specific lsa
+snmp-server host 8.8.8.8 ansibull 
+!
+control-plane
+!
+!
+line con 0
+ logging synchronous
+line vty 0 4
+ exec-timeout 60 0
+ privilege level 15
+ transport input ssh
+ transport output ssh
+line vty 5 15
+ exec-timeout 60 0
+ privilege level 15
+ transport input ssh
+ transport output ssh
+!
+ntp source Loopback0
+ntp server 8.8.8.8 prefer
+end
