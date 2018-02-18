@@ -20,7 +20,7 @@
     ios_config:
       provider: "{{ provider }}"
       diff_config: intended
-      intended_config: "{{ lookup('file', 'master.cfg') }}"
+      intended_config: "{{ lookup('file', '{{ ansible_hostname }}.master.cfg') }}"
 
   - name: check the startup-config against the running-config
     ios_config:
