@@ -1,0 +1,35 @@
+
+---
+- hosts: ios
+  gather_facts: no
+  connection: local
+
+  tasks:
+  - name: OBTAIN LOGIN CREDENTIALS
+    include_vars: secrets.yaml
+
+  - name: DEFINE PROVIDER
+    set_fact:
+      provider:
+        host: "{{ inventory_hostname }}"
+        username: "{{ creds['username'] }}"
+        password: "{{ creds['password'] }}"
+        auth_pass: "{{ creds['auth_pass'] }}"
+
+  - name: check the running-config against master config
+    ios_config:
+      provider: "{{ provider }}"
+      diff_config: intended
+      intended_config: "{{ lookup('file', 'master.cfg') }}"
+
+  - name: check the startup-config against the running-config
+    ios_config:
+      provider: "{{ provider }}"
+      diff_against: startup
+      diff_ignore_lines:
+        - ntp clock .*
+
+  - name: save running to startup when modified
+    ios_config:
+      provider: "{{ provider }}"
+      save_when: modified
