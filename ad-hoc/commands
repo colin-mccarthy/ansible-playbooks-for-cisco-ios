@@ -1,0 +1,1 @@
+ansible -m raw -a "show running-config" -i hosts_rh -c paramiko all
