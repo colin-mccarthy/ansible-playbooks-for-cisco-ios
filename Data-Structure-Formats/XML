@@ -1,0 +1,9 @@
+<Interface>
+	<Gi0/1>
+		<description>Router24</description>
+		<mtu>1500</mtu>
+		<ipaddress>10.10.1.1</ipaddress>
+		<switchport>null</switchport>
+		<vlan>null</vlan>
+	<Gi0/1>
+</Interface>	
