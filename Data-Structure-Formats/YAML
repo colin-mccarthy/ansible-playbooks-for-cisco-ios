@@ -1,0 +1,7 @@
+interface:
+   "gi0/01":
+     description: "Wi/Fi Router-DIA"
+     mtu: 1500
+     ip_address: 10.10.1.1 
+     switchport: "no switchport"
+     vlan: 
