@@ -1,0 +1,1 @@
+192.168.161.15  ansible_ssh_host=192.168.161.14 ansible_network_os=ios
