@@ -9,7 +9,6 @@
   tasks:
   - name: RUN 'SHOW RUN'
     ios_command:
-      provider: "{{ provider }}"
       authorize: yes
       commands:
         - show run 
@@ -19,14 +18,12 @@
   
   - name: ASSIGN HOSTNAME
     ios_config:
-      provider: "{{ provider }}"
       authorize: yes
       lines: ['hostname {{ new_hostname }}'] 
       force: yes
  
   - name: RUN 'SHOW RUN'
     ios_command:
-      provider: "{{ provider }}"
       authorize: yes
       commands:
         - show run 
