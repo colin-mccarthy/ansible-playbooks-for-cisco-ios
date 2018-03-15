@@ -9,7 +9,6 @@
   tasks:
   - name: TELNET CHECK
     ios_command:
-      provider: "{{ provider }}"
       authorize: yes
       commands:
         - show run | beg line vty
