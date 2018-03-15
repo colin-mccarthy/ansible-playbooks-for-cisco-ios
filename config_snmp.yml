@@ -1,26 +1,14 @@
-#Cisco IOS SNMP Playbook
-#Check out my website www.thenetwork.engineer
-
+---
 
 - hosts: ios
-  gather_facts: no
-  connection: local
+  remote_user: pi
+  become: yes
+  become_method: enable
+  connection: network_cli
 
   tasks:
-  - name: OBTAIN LOGIN CREDENTIALS
-    include_vars: secrets.yaml
-
-  - name: DEFINE PROVIDER
-    set_fact:
-      provider:
-        host: "{{ inventory_hostname }}"
-        username: "{{ creds['username'] }}"
-        password: "{{ creds['password'] }}"
-        auth_pass: "{{ creds['auth_pass'] }}"
-
   - name: SHOW RUN | INC SNMP
     ios_command:
-      provider: "{{ provider }}"
       authorize: yes
       commands:
         - show run | i snmp
@@ -30,14 +18,12 @@
  
   - name: SET COMMUNITY STRING
     ios_config:
-      provider: "{{ provider }}"
       authorize: yes
       lines:
         - snmp-server community thenetwork.engineer
 
   - name: TRAP-SOURCE LOOPBACK0
     ios_config:
-      provider: "{{ provider }}"
       authorize: yes
       lines:
          - int lo0
@@ -45,14 +31,12 @@
 
   - name: SET CONTACT INFO
     ios_config:
-      provider: "{{ provider }}"
       authorize: yes
       lines:
         - snmp-server contact colin@thenetwork.engineer
 
   - name: ENABLE TRAPS
     ios_config:
-      provider: "{{ provider }}"
       authorize: yes
       lines:
         - snmp-server enable traps ospf state-change
@@ -66,7 +50,6 @@
 
   - name: SET SNMP SERVER ADDRESS 
     ios_config:
-      provider: "{{ provider }}"
       authorize: yes
       lines:
         - snmp-server host 192.168.161.25 pwdhere
@@ -74,7 +57,6 @@
 
   - name: SHOW RUN | INC SNMP
     ios_command:
-      provider: "{{ provider }}"
       authorize: yes
       commands:
         - show run | i snmp
