@@ -10,7 +10,6 @@
 
   - name: LOAD NEW ACL INTO DEVICE
     ios_config:
-      provider: "{{ provider }}"
       authorize: yes
       lines:
         - 10 permit ip host 1.1.1.1 any log
