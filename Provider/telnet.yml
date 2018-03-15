@@ -1,0 +1,26 @@
+---
+- hosts: ios
+  gather_facts: no
+  connection: local
+
+  tasks:
+  - name: OBTAIN LOGIN CREDENTIALS
+    include_vars: secrets.yml
+
+  - name: DEFINE PROVIDER
+    set_fact:
+      provider:
+        host: "{{ inventory_hostname }}"
+        username: "{{ creds['username'] }}"
+        password: "{{ creds['password'] }}"
+        auth_pass: "{{ creds['auth_pass'] }}"
+
+  - name: TELNET CHECK
+    ios_command:
+      provider: "{{ provider }}"
+      authorize: yes
+      commands:
+        - show run | beg line vty
+    register: vty
+
+  - debug: var=vty.stdout_lines
