@@ -1,18 +1,12 @@
 ---
+
 - hosts: ios
-  gather_facts: no
-  connection: local
+  remote_user: pi
+  become: yes
+  become_method: enable
+  connection: network_cli
 
   tasks:
-  - name: OBTAIN LOGIN CREDENTIALS
-    include_vars: secrets.yaml
-
-  - name: DEFINE PROVIDER
-    set_fact:
-      provider:
-        host: "{{ inventory_hostname }}"
-        username: "{{ creds['username'] }}"
-        password: "{{ creds['password'] }}"
 
   - name: LOAD NEW ACL INTO DEVICE
     ios_config:
