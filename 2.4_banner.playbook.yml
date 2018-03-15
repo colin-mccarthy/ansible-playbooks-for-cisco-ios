@@ -1,23 +1,14 @@
 ---
+
 - hosts: ios
-  gather_facts: no
-  connection: local
+  remote_user: pi
+  become: yes
+  become_method: enable
+  connection: network_cli
 
   tasks:
-  - name: OBTAIN LOGIN CREDENTIALS
-    include_vars: secrets.yaml
-
-  - name: DEFINE PROVIDER
-    set_fact:
-      provider:
-        host: "{{ inventory_hostname }}"
-        username: "{{ creds['username'] }}"
-        password: "{{ creds['password'] }}"
-        auth_pass: "{{ creds['auth_pass'] }}"
-
   - name: SHOW RUN | BEG BANNER
     ios_command:
-      provider: "{{ provider }}"
       authorize: yes
       commands:
         - show run | beg banner
@@ -27,7 +18,6 @@
 
   - name: Configure banner from file
     ios_banner:
-      provider: "{{ provider }}"
       authorize: yes
       banner: login
       text: "{{ lookup('file', './vars/raw_banner.cfg') }}"
@@ -35,7 +25,6 @@
 
   - name: SHOW RUN | BEG BANNER
     ios_command:
-      provider: "{{ provider }}"
       authorize: yes
       commands:
         - show run | beg banner
