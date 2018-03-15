@@ -12,24 +12,14 @@
 
 
 - hosts: ios
-  gather_facts: no
-  connection: local
+  remote_user: pi
+  become: yes
+  become_method: enable
+  connection: network_cli
 
   tasks:
-  - name: OBTAIN LOGIN CREDENTIALS
-    include_vars: secrets.yaml
-
-  - name: DEFINE PROVIDER
-    set_fact:
-      provider:
-        host: "{{ inventory_hostname }}"
-        username: "{{ creds['username'] }}"
-        password: "{{ creds['password'] }}"
-        auth_pass: "{{ creds['auth_pass'] }}"
-
   - name: SHOW RUN | BEG VTY
     ios_command:
-      provider: "{{ provider }}"
       authorize: yes
       commands:
         - show run | beg vty
@@ -39,28 +29,24 @@
  
   - name: NO SERVICE PAD
     ios_config:
-      provider: "{{ provider }}"
       authorize: yes
       lines:
         - no service pad
 
   - name: IP SSH VERSION 2
     ios_config:
-      provider: "{{ provider }}"
       authorize: yes
       lines:
         - ip ssh version 2
 
   - name: NO IP DOMAIN-LOOKUP
     ios_config:
-      provider: "{{ provider }}"
       authorize: yes
       lines:
         - no ip domain-lookup
 
   - name: DISABLE HTTP/HTTPS MANAGMENT
     ios_config:
-      provider: "{{ provider }}"
       authorize: yes
       lines:
         - no ip http server
@@ -68,14 +54,12 @@
 
   - name: DISABLE CDP 
     ios_config:
-      provider: "{{ provider }}"
       authorize: yes
       lines:
         - no cdp run
 
   - name: TRANSPORT INPUT SSH
     ios_config:
-      provider: "{{ provider }}"
       authorize: yes
       lines:
         - line vty 0 15
@@ -83,21 +67,18 @@
 
   - name: LOGGING BUFFERED 15000
     ios_config:
-      provider: "{{ provider }}"
       authorize: yes
       lines:
         - logging buffered 15000
 
   - name: SERVICE PASSWORD ENCRYPTION
     ios_config:
-      provider: "{{ provider }}"
       authorize: yes
       lines:
         - service password-encryption
         
   - name: SHOW RUN | BEG VTY
     ios_command:
-      provider: "{{ provider }}"
       authorize: yes
       commands:
         - show run | beg vty
