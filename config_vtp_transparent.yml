@@ -7,15 +7,6 @@
   connection: network_cli
  
   tasks: 
-  - name: SHOW VTP STATUS
-    ios_command:
-      authorize: yes
-      commands:
-        - show vtp status
-    register: before_vtp
- 
-  - debug: var=before_vtp.stdout_lines
- 
   - name: CHANGE VTP MODE
     ios_config:
       authorize: yes
