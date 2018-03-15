@@ -1,43 +1,34 @@
+---
+
 - hosts: ios
-  gather_facts: no
-  connection: local
+  remote_user: pi
+  become: yes
+  become_method: enable
+  connection: network_cli
+
 
   tasks:
-  - name: OBTAIN LOGIN CREDENTIALS
-    include_vars: secrets.yaml
-
-  - name: DEFINE PROVIDER
-    set_fact:
-      provider:
-        host: "{{ inventory_hostname }}"
-        username: "{{ creds['username'] }}"
-        password: "{{ creds['password'] }}"
-        auth_pass: "{{ creds['auth_pass'] }}"
-
   - name: SHOW RUN | I SSH
     ios_command:
-      provider: "{{ provider }}"
       authorize: yes
       commands:
         - show run | i ssh
     register: before_v2
- 
+
   - debug: var=before_v2.stdout_lines
- 
+
   - name: IP SSH VERSION 2
     ios_config:
-      provider: "{{ provider }}"
       authorize: yes
       lines:
         - ip ssh version 2
 
- 
   - name: SHOW RUN | I SSH
     ios_command:
-      provider: "{{ provider }}"
       authorize: yes
       commands:
         - show run | i ssh
     register: after_v2
- 
+
   - debug: var=after_v2.stdout_lines
+
