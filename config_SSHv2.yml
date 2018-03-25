@@ -6,7 +6,6 @@
   become_method: enable
   connection: network_cli
 
-
   tasks:
   - name: IP SSH VERSION 2
     ios_config:
