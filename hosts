@@ -7,6 +7,6 @@
 [ios:vars]
 
 ansible_ssh_pass=cisco
-aansible_become_pass=cisco
+ansible_become_pass=cisco
 remote_user=pi
 ansible_network_os=ios
