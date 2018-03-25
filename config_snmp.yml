@@ -63,3 +63,7 @@
     register: after_snmp
  
   - debug: var=after_snmp.stdout_lines
+
+  - name: save running to startup when modified
+    ios_config:
+      save_when: modified
