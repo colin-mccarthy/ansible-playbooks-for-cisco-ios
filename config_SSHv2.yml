@@ -8,15 +8,6 @@
 
 
   tasks:
-  - name: SHOW RUN | I SSH
-    ios_command:
-      authorize: yes
-      commands:
-        - show run | i ssh
-    register: before_v2
-
-  - debug: var=before_v2.stdout_lines
-
   - name: IP SSH VERSION 2
     ios_config:
       authorize: yes
