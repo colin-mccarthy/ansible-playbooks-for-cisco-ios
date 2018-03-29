@@ -1,15 +1,11 @@
 ---
 - hosts: ios
-  gather_facts: no
-  connection: local
+  connection: network_cli
 
   tasks:
 
 - name: "create a diff"
     napalm_install_config:
-      hostname: "{{ inventory_hostname }}"
-      username: "{{ creds['username'] }}"
-      password: "{{ creds['password'] }}"
       dev_os: "ios"
       config_file: initial.conf
       commit_changes: false
