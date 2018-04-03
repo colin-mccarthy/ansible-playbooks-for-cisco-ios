@@ -4,7 +4,7 @@
   remote_user: pi
   become: yes
   become_method: enable
-  connection: network_cli
+
 
   tasks:
   - name: TELNET CHECK
