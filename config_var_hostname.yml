@@ -1,32 +1,14 @@
 ---
+- name: 
+  hosts: ios
 
-- hosts: ios
-  remote_user: pi
-  become: yes
-  become_method: enable
-  connection: network_cli
  
   tasks:
-  - name: RUN 'SHOW RUN'
-    ios_command:
-      authorize: yes
-      commands:
-        - show run 
-    register: before_base
- 
-  - debug: var=before_base.stdout_lines
   
   - name: ASSIGN HOSTNAME
     ios_config:
       authorize: yes
       lines: ['hostname {{ new_hostname }}'] 
       force: yes
+  
  
-  - name: RUN 'SHOW RUN'
-    ios_command:
-      authorize: yes
-      commands:
-        - show run 
-    register: after_base
- 
-  - debug: var=after_base.stdout_lines
