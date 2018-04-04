@@ -1,10 +1,7 @@
 ---
+- name: configure snmp
+  hosts: ios
 
-- hosts: ios
-  remote_user: pi
-  become: yes
-  become_method: enable
-  connection: network_cli
 
   tasks:
   - name: SHOW RUN | INC SNMP
