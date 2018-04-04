@@ -11,10 +11,11 @@ To use, download the .zip and extract the contents or clone the repository by ty
 
 
 
-With the network changes in Ansible 2.5 you need to set up your group vars for your Junos group like this.
+With the network changes in Ansible 2.5 you need to set up your group vars for your ios group like this.
 
 ```
 ansible_ssh_pass=foo
+ansible_become_pass=foo
 remote_user=foo
 ansible_network_os=ios
 ansible_connection=network_cli
