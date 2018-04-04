@@ -8,3 +8,4 @@ ansible_ssh_pass=cisco
 ansible_become_pass=cisco
 remote_user=pi
 ansible_network_os=ios
+ansible_connection=network_cli
