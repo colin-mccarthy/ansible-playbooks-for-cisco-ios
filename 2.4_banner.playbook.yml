@@ -1,20 +1,10 @@
 ---
+- name: Add a banner
+  hosts: ios
 
-- hosts: ios
-  remote_user: pi
-  become: yes
-  become_method: enable
-  connection: network_cli
 
   tasks:
-  - name: SHOW RUN | BEG BANNER
-    ios_command:
-      authorize: yes
-      commands:
-        - show run | beg banner
-    register: banner
 
-  - debug: var=banner.stdout_lines
 
   - name: Configure banner from file
     ios_banner:
