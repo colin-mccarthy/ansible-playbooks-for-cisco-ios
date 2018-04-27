@@ -1,0 +1,8 @@
+
+
+
+nxos_command:
+  command:
+     - command: foo
+        prompt: question
+        response: yes
