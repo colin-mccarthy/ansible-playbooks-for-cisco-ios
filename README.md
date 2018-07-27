@@ -11,17 +11,25 @@ To use, download the .zip and extract the contents or clone the repository by ty
 
 
 
-With the network changes in Ansible 2.5 you need to set up your group vars for your ios group like this.
+Your host vars should look something like this if you're using Ansible >= 2.5
 
 ```
-ansible_ssh_pass=foo
-ansible_become_pass=foo
-remote_user=foo
+
+
+ansible_pass=cisco
+ansible_become_pass=cisco
+ansible_user=admin
 ansible_network_os=ios
 ansible_connection=network_cli
+ansible_become=yes
+ansible_become_method=enable
+
+
 ```
 
+Here is a link to a blog explaining the changes that took place for Ansible 2.5
 
+https://www.ansible.com/blog/coming-soon-networking-features-in-ansible-2.5
 
 
 
