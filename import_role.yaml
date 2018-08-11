@@ -1,0 +1,11 @@
+---
+ - hosts: ios
+   connection: networkcli
+   gather_facts: no
+   tasks:
+     - import_role:
+         name: interfaces
+       vars:
+         interfaces:
+           - "GigabitEthernet0/1"
+           - "GigabitEthernet0/2"
