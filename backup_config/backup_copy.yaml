@@ -1,0 +1,11 @@
+   
+   
+   - name: Get running config
+     ios_command:
+       commands: show run
+     register: show_run
+
+   - name: Save config to file
+     copy:
+       content: "{{ show_run.stdout[0] }}"
+       dest: "backups/{{inventory_hostname}}-{{ansible_facts.date_time.}}.txt"
