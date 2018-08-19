@@ -1,0 +1,71 @@
+---
+- hosts: ios
+  gather_facts: no
+  connection: network_cli
+
+  vars:
+    dns_servers:
+      - ip name-server 8.8.8.8
+      - ip name-server 8.8.4.4
+    ntp_servers:
+      - ntp server uk.pool.ntp.org
+      - ntp server time.apple.com
+
+  tasks:
+  - name: BACKUP
+    ios_config:
+      backup: yes
+
+  - name: "GET CONFIG"
+    ios_command:
+      commands:
+        - "show running-config | include ip name-server"
+        - "show running-config | include ntp server"
+    register: get_config
+
+  - debug: var=get_config.stdout_lines
+
+  - name: RUN 'Set DNS'
+    with_items: "{{ dns_servers }}"
+    ios_config:
+      lines:
+        - "{{ item }}"
+    register: set_dns
+
+  - name: RUN 'Remove DNS'
+    when: "(get_config.stdout_lines[0][0] != '') and (item not in dns_servers)"
+    with_items: "{{ get_config.stdout_lines[0] }}"
+    register: remove_dns
+    ios_config:
+      lines:
+        - "no {{ item }}"
+
+  - name: CHECK CHANGE - dns
+    when: "(set_dns.changed == true) or (remove_dns.changed == true)"
+    set_fact: configured=true
+
+  - name: RUN 'Set NTP'
+    with_items: "{{ ntp_servers }}"
+    ios_config:
+      lines:
+          - "{{ item }}"
+    register: set_ntp
+
+  - name: RUN 'Remove NTP'
+    when: "(get_config.stdout_lines[1][0] != '') and (item not in ntp_servers)"
+    with_items: "{{ get_config.stdout_lines[1] }}"
+    register: remove_ntp
+    ios_config:
+      lines:
+        - "no {{ item }}"
+
+  - name: CHECK CHANGE - ntp
+    when: "(set_ntp.changed == true) or (remove_ntp.changed == true)"
+    set_fact: configured=true
+
+  - name: RUN 'wr mem'
+    when: "(configured is defined) and (configured == true)"
+    register: save_config
+    ios_command:
+      commands:
+        - "write memory"
