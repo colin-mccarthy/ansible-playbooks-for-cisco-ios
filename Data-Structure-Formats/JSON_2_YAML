@@ -1,0 +1,13 @@
+{"macs": {"vlan2": ["AAAA.BBBB.CCCC", "1111.2222.3333"], "vlan3": ["AAAA.1111.BBBB"]}}
+
+
+
+
+
+---
+macs:
+  vlan2:
+  - AAAA.BBBB.CCCC
+  - 1111.2222.3333
+  vlan3:
+  - AAAA.1111.BBBB
