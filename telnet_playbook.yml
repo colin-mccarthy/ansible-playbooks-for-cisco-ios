@@ -5,7 +5,6 @@
   tasks:
   - name: TELNET CHECK
     ios_command:
-      authorize: yes
       commands:
         - show run | beg line vty
     register: vty
