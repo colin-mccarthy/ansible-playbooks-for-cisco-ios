@@ -1,0 +1,13 @@
+
+
+
+
+- name: configure policer in Scavenger class
+ ios_config:
+   lines:
+     - conform-action transmit
+     - exceed-action drop
+   parents:
+     - policy-map Foo
+     - class Scavenger
+     - police cir 64000
