@@ -1,0 +1,11 @@
+
+
+
+tasks:
+ - name: change hostname
+   ios_config:
+     diff_against: intended
+     intended_config: "{{ lookup('file', 'intended.cfg') }}"
+     save_when: modified
+     diff_ignore_lines:
+     - ntp clock-period .*
