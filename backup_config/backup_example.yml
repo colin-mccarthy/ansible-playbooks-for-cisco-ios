@@ -4,22 +4,9 @@
   connection: local
 
   tasks:
-  - name: OBTAIN LOGIN CREDENTIALS
-    include_vars: secrets.yaml
-
-  - name: DEFINE PROVIDER
-    set_fact:
-      provider:
-        host: "{{ inventory_hostname }}"
-        username: "{{ creds['username'] }}"
-        password: "{{ creds['password'] }}"
-        auth_pass: "{{ creds['auth_pass'] }}"
-
 
   - name: BACKUP RUNNING CONFIG
     ios_config:
-      provider: "{{ provider }}"
-      authorize: yes
       backup: yes
     
       
