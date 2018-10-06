@@ -1,40 +1,37 @@
 ---
-- name: configure snmp
-  hosts: ios
+- name: ios
+  gather_facts: no
+  connection: network_cli
 
 
   tasks:
-  - name: SHOW RUN | INC SNMP
+
+  - name: SHOW RUN | INC SNMP ON {{ ansible_ssh_host }}
     ios_command:
-      authorize: yes
       commands:
         - show run | i snmp
     register: before_snmp
  
   - debug: var=before_snmp.stdout_lines
  
-  - name: SET COMMUNITY STRING
+  - name: SET COMMUNITY STRING ON {{ ansible_ssh_host }}
     ios_config:
-      authorize: yes
       lines:
         - snmp-server community thenetwork.engineer
 
-  - name: TRAP-SOURCE LOOPBACK0
+  - name: TRAP-SOURCE LOOPBACK0 ON {{ ansible_ssh_host }}
     ios_config:
-      authorize: yes
       lines:
          - int lo0
          - snmp-server trap-source Loopback0
 
-  - name: SET CONTACT INFO
+  - name: SET CONTACT INFO ON {{ ansible_ssh_host }}
     ios_config:
-      authorize: yes
       lines:
         - snmp-server contact colin@thenetwork.engineer
 
-  - name: ENABLE TRAPS
+  - name: ENABLE TRAPS ON {{ ansible_ssh_host }}
     ios_config:
-      authorize: yes
       lines:
         - snmp-server enable traps ospf state-change
         - snmp-server enable traps ospf errors
@@ -45,22 +42,20 @@
         - snmp-server enable traps ospf cisco-specific lsa
 
 
-  - name: SET SNMP SERVER ADDRESS 
+  - name: SET SNMP SERVER ADDRESS ON {{ ansible_ssh_host }}
     ios_config:
-      authorize: yes
       lines:
         - snmp-server host 192.168.161.25 pwdhere
 
 
-  - name: SHOW RUN | INC SNMP
+  - name: SHOW RUN | INC SNMP ON {{ ansible_ssh_host }}
     ios_command:
-      authorize: yes
       commands:
         - show run | i snmp
     register: after_snmp
  
   - debug: var=after_snmp.stdout_lines
 
-  - name: save running to startup when modified
+  - name: SAVE RUNNING CONFIG TO STARTUP CONFIG WHEN MODIFIED  ON {{ ansible_ssh_host }}
     ios_config:
       save_when: modified

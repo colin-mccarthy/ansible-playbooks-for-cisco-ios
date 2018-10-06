@@ -1,21 +1,18 @@
 ---
-- name: Add a banner
-  hosts: ios
-
+- hosts: ios
+  gather_facts: no
+  connection: network_cli
 
   tasks:
 
-
-  - name: Configure banner from file
+  - name: CONFIGURE BANNER ON {{ ansible_ssh_host }}
     ios_banner:
-      authorize: yes
       banner: login
       text: "{{ lookup('file', './vars/raw_banner.cfg') }}"
       state: present
 
-  - name: SHOW RUN | BEG BANNER
+  - name: SHOW RUN | BEG BANNER ON {{ ansible_ssh_host }}
     ios_command:
-      authorize: yes
       commands:
         - show run | beg banner
     register: banner

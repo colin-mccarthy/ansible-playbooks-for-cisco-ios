@@ -1,13 +1,13 @@
 ---
-- name: Add an Access List
-  hosts: ios
+- hosts: ios
+  gather_facts: no
+  connection: network_cli
 
 
   tasks:
 
-  - name: LOAD NEW ACL INTO DEVICE
+  - name: LOAD NEW ACL ON {{ ansible_ssh_host }}
     ios_config:
-      authorize: yes
       lines:
         - 10 permit ip host 1.1.1.1 any log
         - 30 permit ip host 3.3.3.3 any log

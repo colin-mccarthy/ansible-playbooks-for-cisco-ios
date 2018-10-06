@@ -2,19 +2,16 @@
 
 - hosts: ios
   become: yes
-  become_method: enable
   connection: network_cli
 
   tasks:
-  - name: IP SSH VERSION 2
+  - name: CONFIGURE SSH VERSION 2 ON {{ ansible_ssh_host }}
     ios_config:
-      authorize: yes
       lines:
         - ip ssh version 2
 
-  - name: SHOW RUN | I SSH
+  - name: SHOW RUN | I SSH ON {{ ansible_ssh_host }}
     ios_command:
-      authorize: yes
       commands:
         - show run | i ssh
     register: after_v2

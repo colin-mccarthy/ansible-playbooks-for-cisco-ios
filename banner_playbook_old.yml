@@ -1,20 +1,17 @@
 ---
-- name: Add a Banner
-  hosts: ios
-
+- hosts: ios
+  gather_facts: no
+  connection: network_cli
 
   tasks:
 
-
-  - name: CREATE NEW BANNER
+  - name: CREATE NEW BANNER ON {{ ansible_ssh_host }}
     ios_config:
-      authorize: yes
       lines:
         - banner motd ^Welcome to the 2 day CCNA boot camp^
 
-  - name: SHOW RUN | BEG BANNER
+  - name: SHOW RUN | BEG BANNER ON {{ ansible_ssh_host }}
     ios_command:
-      authorize: yes
       commands:
         - show run | beg banner
     register: banner

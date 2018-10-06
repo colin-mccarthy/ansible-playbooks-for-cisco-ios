@@ -8,74 +8,61 @@
 #+ no cdp run
 #+ transport input ssh
 #+ logging buffered 15000
-#+ service password-encryption
 
 
 - hosts: ios
+  gather_facts: no
+  connection: network_cli
 
   tasks:
-  - name: SHOW RUN | BEG VTY
+
+  - name: SHOW RUN | BEG VTY ON {{ ansible_ssh_host }}
     ios_command:
-      authorize: yes
       commands:
         - show run | beg vty
     register: before_vty
  
   - debug: var=before_vty.stdout_lines
  
-  - name: NO SERVICE PAD
+  - name: NO SERVICE PAD ON {{ ansible_ssh_host }}
     ios_config:
-      authorize: yes
       lines:
         - no service pad
 
-  - name: IP SSH VERSION 2
+  - name: IP SSH VERSION 2 ON {{ ansible_ssh_host }}
     ios_config:
-      authorize: yes
       lines:
         - ip ssh version 2
 
-  - name: NO IP DOMAIN-LOOKUP
+  - name: NO IP DOMAIN-LOOKUP ON {{ ansible_ssh_host }}
     ios_config:
-      authorize: yes
       lines:
         - no ip domain-lookup
 
-  - name: DISABLE HTTP/HTTPS MANAGMENT
+  - name: DISABLE HTTP/HTTPS MANAGMENT ON {{ ansible_ssh_host }}
     ios_config:
-      authorize: yes
       lines:
         - no ip http server
         - no ip http secure-server
 
-  - name: DISABLE CDP 
+  - name: DISABLE CDP ON {{ ansible_ssh_host }}
     ios_config:
-      authorize: yes
       lines:
         - no cdp run
 
-  - name: TRANSPORT INPUT SSH
+  - name: TRANSPORT INPUT SSH ON {{ ansible_ssh_host }}
     ios_config:
-      authorize: yes
       lines:
         - line vty 0 15
         - transport input ssh
 
-  - name: LOGGING BUFFERED 15000
+  - name: LOGGING BUFFERED 15000 ON {{ ansible_ssh_host }}
     ios_config:
-      authorize: yes
       lines:
         - logging buffered 15000
-
-  - name: SERVICE PASSWORD ENCRYPTION
-    ios_config:
-      authorize: yes
-      lines:
-        - service password-encryption
         
-  - name: SHOW RUN | BEG VTY
+  - name: SHOW RUN | BEG VTY ON {{ ansible_ssh_host }}
     ios_command:
-      authorize: yes
       commands:
         - show run | beg vty
     register: after_vty
