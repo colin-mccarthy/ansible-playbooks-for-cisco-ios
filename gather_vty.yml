@@ -4,7 +4,7 @@
   connection: network_cli
 
   tasks:
-  - name: SHOW VTY CONFIG ON {{ ansible_ssh_host }}
+  - name: REGISTER VTY CONFIG ON {{ ansible_ssh_host }}
     ios_command:
       commands:
         - show run | beg line vty
