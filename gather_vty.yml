@@ -1,9 +1,10 @@
 ---
-- name: Check if Telnet is enabled
-  hosts: ios
+- hosts: ios
+  gather_facts: no
+  connection: network_cli
 
   tasks:
-  - name: TELNET CHECK
+  - name: SHOW VTY CONFIG ON {{ ansible_ssh_host }}
     ios_command:
       commands:
         - show run | beg line vty
