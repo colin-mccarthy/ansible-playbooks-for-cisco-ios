@@ -1,0 +1,44 @@
+- hosts: localhost
+  vars:
+    interface:
+       "gi0/01":
+         description: "Wi/Fi Router-DIA"
+         admin_state: "no shutdown"
+         speed:
+         duplex:
+         mtu:
+         vlan:
+         ip_address:
+         vlan:
+         aggregate:
+       "gi0/02":
+         description: "Test-description"
+         admin_state: "no shutdown"
+         speed:
+         duplex:
+         mtu:
+         vlan:
+         ip_address:
+         vlan:
+         aggregate:
+  tasks:
+  - debug:
+      msg: |
+        {% for iface in interface %}
+        interface {{ iface }}
+        {% if 'description' in interface[iface] %}
+        description {{ interface[iface].description }}
+        {% endif %}
+        {% if 'admin_state' in interface[iface] %}
+        {{ interface[iface].admin_state }}
+        {% endif %}
+        {% if 'speed' in interface[iface] %}
+        speed {{ interface[iface].speed }}
+        {% endif %}
+        {% if 'duplex' in interface[iface] %}
+        duplex {{ interface[iface].duplex }}
+        {% endif %}
+        {% if 'vlan' in interface[iface] %}
+        switchport access vlan {{ interface[iface].vlan }}
+        {% endif %}
+        {% endfor %}
