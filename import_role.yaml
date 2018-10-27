@@ -2,6 +2,7 @@
  - hosts: ios
    connection: networkcli
    gather_facts: no
+   
    tasks:
      - import_role:
          name: interfaces
