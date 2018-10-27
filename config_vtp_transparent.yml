@@ -1,18 +1,18 @@
 ---
-- name: Change VTP mode
+- name: CHANGE VTP MODE
   hosts: ios
+  gather_facts: no
+  connection: network_cli
 
  
   tasks: 
   - name: CHANGE VTP MODE
     ios_config:
-      authorize: yes
       lines:
         - vtp mode transparent
       
   - name: SHOW VTP STATUS
     ios_command:
-      authorize: yes
       commands:
         - show vtp status 
     register: after_vtp
