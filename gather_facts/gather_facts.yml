@@ -1,25 +1,12 @@
 ---
 - hosts: ios
   gather_facts: no
-  connection: local
+  connection: network_cli
 
   tasks:
-  - name: OBTAIN LOGIN CREDENTIALS
-    include_vars: secrets.yaml
-
-  - name: DEFINE PROVIDER
-    set_fact:
-      provider:
-        host: "{{ inventory_hostname }}"
-        username: "{{ creds['username'] }}"
-        password: "{{ creds['password'] }}"
-        auth_pass: "{{ creds['auth_pass'] }}"
-
 
   - name: GATHER FACTS
     ios_facts:
-      provider: "{{ provider }}"
-      authorize: yes
 
   - copy: content="{{ iosfacts_out | to_nice_json }}" dest="out/{{inventory_hostname}}_iosfacts.json"
 

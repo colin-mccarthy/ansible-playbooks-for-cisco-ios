@@ -1,13 +1,27 @@
+---
+- hosts: ios
+  gather_facts: no
+  connection: network_cli
 
 
+  tasks:
+
+  - name: LOAD NEW ACL ON {{ ansible_ssh_host }}
+    ios_config:
+      lines:
+        - 10 permit ip host 1.1.1.1 any log
+        - 30 permit ip host 3.3.3.3 any log
+        - 40 permit ip host 4.4.4.4 any log
+      parents: ip access-list extended test
+      before: no ip access-list extended test
 
 
-- name: configure policer in Scavenger class
- ios_config:
-   lines:
-     - conform-action transmit
-     - exceed-action drop
-   parents:
-     - policy-map Foo
-     - class Scavenger
-     - police cir 64000
+  - name: CONFIGURE POLINCY IN SCAVENGER CLASS
+    ios_config:
+       lines:
+         - conform-action transmit
+         - exceed-action drop
+     parents:
+       - policy-map Foo
+       - class Scavenger
+       - police cir 64000
