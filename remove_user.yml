@@ -1,0 +1,21 @@
+---
+- hosts: ios
+  gather_facts: no
+  connection: network_cli
+
+  vars:
+     names:
+       - user1
+       - user2
+  tasks:
+     - name: Removing user
+       ios_user:
+         name: "{{ item }}"
+         state: absent
+       with_items: "{{ names }}"
+       notify: save
+
+  handlers:
+     - name: save
+       ios_config:
+         save_when: modified
