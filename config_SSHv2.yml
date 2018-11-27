@@ -5,12 +5,12 @@
   connection: network_cli
 
   tasks:
-  - name: CONFIGURE SSH VERSION 2 ON {{ ansible_ssh_host }}
+  - name: CONFIGURE SSH VERSION 2 ON {{ ansible_hostname }}
     ios_config:
       lines:
         - ip ssh version 2
 
-  - name: SHOW RUN | I SSH ON {{ ansible_ssh_host }}
+  - name: SHOW RUN | I SSH ON {{ ansible_hostname }}
     ios_command:
       commands:
         - show run | i ssh
