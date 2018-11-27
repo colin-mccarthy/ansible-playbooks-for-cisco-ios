@@ -1,6 +1,0 @@
-*.retry
-*.zip
-.gitignore
-#ignore everything in roles/ except requirments.yml
-roles/*
-!roles/requirements.yml
