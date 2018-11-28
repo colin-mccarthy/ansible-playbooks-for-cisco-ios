@@ -1,0 +1,27 @@
+---
+- hosts: ios
+  gather_facts: no
+  connection: network_cli
+
+
+  tasks:
+     - name: Create vlan
+       ios_vlan:
+         vlan_id: 100
+         name: test-vlan
+         state: present
+
+     - name: Add interfaces to VLAN
+       ios_vlan:
+         vlan_id: 100
+         interfaces:
+           - GigabitEthernet0/10
+           - GigabitEthernet0/11
+
+     - name: Check if interfaces is assigned to VLAN
+       ios_vlan:
+         vlan_id: 100
+         associated_interfaces:
+           - GigabitEthernet0/10
+           - GigabitEthernet0/11
+

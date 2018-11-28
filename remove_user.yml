@@ -7,11 +7,14 @@
      names:
        - user1
        - user2
+
+
   tasks:
-     - name: Removing user
+     - name: remove users
        ios_user:
          name: "{{ item }}"
          state: absent
+         privilege: 15
        with_items: "{{ names }}"
        notify: save
 
