@@ -1,0 +1,22 @@
+
+---
+- hosts: ios
+  gather_facts: no
+  connection: network_cli
+
+  vars:
+    vlan: 10
+
+  tasks:
+     - name: Create vlan
+       ios_vlan:
+         vlan_id: "{{ vlan }}"
+         name: test-vlan
+         state: present
+
+     - name: Add interfaces to VLAN
+       ios_vlan:
+         vlan_id: "{{ vlan }}"
+         interfaces:
+           - GigabitEthernet0/10
+           - GigabitEthernet0/11
