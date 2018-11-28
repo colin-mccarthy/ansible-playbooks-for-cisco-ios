@@ -57,6 +57,3 @@
  
   - debug: var=after_snmp.stdout_lines
 
-  - name: SAVE RUNNING CONFIG TO STARTUP CONFIG WHEN MODIFIED  ON {{ ansible_ssh_host }}
-    ios_config:
-      save_when: modified
