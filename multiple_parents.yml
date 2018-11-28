@@ -6,7 +6,7 @@
 
   tasks:
 
-  - name: LOAD NEW ACL ON {{ ansible_ssh_host }}
+  - name: LOAD NEW ACL ON DEVICE
     ios_config:
       lines:
         - 10 permit ip host 1.1.1.1 any log
@@ -16,12 +16,12 @@
       before: no ip access-list extended test
 
 
-  - name: CONFIGURE POLINCY IN SCAVENGER CLASS
+  - name: CONFIGURE POLICY IN SCAVENGER CLASS
     ios_config:
        lines:
          - conform-action transmit
          - exceed-action drop
-     parents:
-       - policy-map Foo
-       - class Scavenger
-       - police cir 64000
+       parents:
+         - policy-map Foo
+         - class Scavenger
+         - police cir 64000
