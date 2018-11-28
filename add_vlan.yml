@@ -3,24 +3,26 @@
   gather_facts: no
   connection: network_cli
 
+# {{vlan}} input  will be a survey in Ansible Tower
+
 
   tasks:
      - name: Create vlan
        ios_vlan:
-         vlan_id: 100
+         vlan_id: "{{ vlan }}"
          name: test-vlan
          state: present
 
      - name: Add interfaces to VLAN
        ios_vlan:
-         vlan_id: 100
+         vlan_id: "{{ vlan }}"
          interfaces:
            - GigabitEthernet0/10
            - GigabitEthernet0/11
 
      - name: Check if interfaces is assigned to VLAN
        ios_vlan:
-         vlan_id: 100
+         vlan_id: "{{ vlan }}"
          associated_interfaces:
            - GigabitEthernet0/10
            - GigabitEthernet0/11
