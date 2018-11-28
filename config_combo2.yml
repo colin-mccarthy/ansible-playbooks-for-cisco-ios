@@ -16,7 +16,7 @@
 
   tasks:
 
-  - name: SHOW RUN | BEG VTY ON {{ ansible_ssh_host }}
+  - name: SHOW RUN | BEG VTY 
     ios_command:
       commands:
         - show run | beg vty
@@ -24,44 +24,44 @@
  
   - debug: var=before_vty.stdout_lines
  
-  - name: NO SERVICE PAD ON {{ ansible_ssh_host }}
+  - name: NO SERVICE PAD 
     ios_config:
       lines:
         - no service pad
 
-  - name: IP SSH VERSION 2 ON {{ ansible_ssh_host }}
+  - name: IP SSH VERSION 2 
     ios_config:
       lines:
         - ip ssh version 2
 
-  - name: NO IP DOMAIN-LOOKUP ON {{ ansible_ssh_host }}
+  - name: NO IP DOMAIN-LOOKUP
     ios_config:
       lines:
         - no ip domain-lookup
 
-  - name: DISABLE HTTP/HTTPS MANAGMENT ON {{ ansible_ssh_host }}
+  - name: DISABLE HTTP/HTTPS MANAGMENT 
     ios_config:
       lines:
         - no ip http server
         - no ip http secure-server
 
-  - name: DISABLE CDP ON {{ ansible_ssh_host }}
+  - name: DISABLE CDP 
     ios_config:
       lines:
         - no cdp run
 
-  - name: TRANSPORT INPUT SSH ON {{ ansible_ssh_host }}
+  - name: TRANSPORT INPUT SSH 
     ios_config:
       lines:
         - line vty 0 15
         - transport input ssh
 
-  - name: LOGGING BUFFERED 15000 ON {{ ansible_ssh_host }}
+  - name: LOGGING BUFFERED 15000 
     ios_config:
       lines:
         - logging buffered 15000
         
-  - name: SHOW RUN | BEG VTY ON {{ ansible_ssh_host }}
+  - name: SHOW RUN | BEG VTY ON 
     ios_command:
       commands:
         - show run | beg vty
