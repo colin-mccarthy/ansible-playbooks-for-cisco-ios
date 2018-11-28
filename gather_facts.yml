@@ -7,3 +7,8 @@
 
   - name: GATHER FACTS
     ios_facts:
+    
+    register: facts
+
+  - debug: var=facts.stdout_lines
+
