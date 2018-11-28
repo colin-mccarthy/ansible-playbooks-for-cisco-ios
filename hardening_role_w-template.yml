@@ -1,8 +1,0 @@
----
-
-
-- hosts: ios
-  gather_facts: no
-  connection: local
-  roles:
-    - ansible_cisco_ios_12.2_hardening_w-template
