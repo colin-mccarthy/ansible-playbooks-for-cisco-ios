@@ -15,14 +15,6 @@
   connection: network_cli
 
   tasks:
-
-  - name: SHOW RUN | BEG VTY 
-    ios_command:
-      commands:
-        - show run | beg vty
-    register: before_vty
- 
-  - debug: var=before_vty.stdout_lines
  
   - name: NO SERVICE PAD 
     ios_config:
