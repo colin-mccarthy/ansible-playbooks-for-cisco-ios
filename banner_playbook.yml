@@ -14,7 +14,7 @@
   - name: SHOW RUN | BEG BANNER 
     ios_command:
       commands:
-        - show run | beg banner
+        - show run | beg HODL
     register: banner
 
   - debug: var=banner.stdout_lines
