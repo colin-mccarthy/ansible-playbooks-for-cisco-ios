@@ -7,18 +7,18 @@
 
   tasks:
  
-  - name: SET COMMUNITY STRING ON {{ ansible_host }}
+  - name: SET COMMUNITY STRING 
     ios_config:
       lines:
         - snmp-server community thenetwork.engineer
 
-  - name: TRAP-SOURCE LOOPBACK0 ON {{ ansible_host }}
+  - name: TRAP-SOURCE LOOPBACK0 
     ios_config:
       lines:
          - int lo0
          - snmp-server trap-source Loopback0
 
-  - name: SET CONTACT INFO ON {{ ansible_host }}
+  - name: SET CONTACT INFO 
     ios_config:
       lines:
         - snmp-server contact colin@thenetwork.engineer
@@ -35,7 +35,7 @@
         - snmp-server enable traps ospf cisco-specific lsa
 
 
-  - name: SET SNMP SERVER ADDRESS ON {{ ansible_host }}
+  - name: SET SNMP SERVER ADDRESS 
     ios_config:
       lines:
         - snmp-server host 192.168.161.25 pwdhere
