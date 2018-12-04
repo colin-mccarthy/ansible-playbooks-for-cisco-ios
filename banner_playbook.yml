@@ -11,10 +11,10 @@
       text: "{{ lookup('file', './vars/raw_banner.cfg') }}"
       state: present
 
-  - name: SHOW RUN | SEC BANNER 
+  - name: SHOW RUN | BEG BANNER 
     ios_command:
       commands:
-        - show run | sec banner
+        - show run | beg banner
     register: banner
 
   - debug: var=banner.stdout_lines
