@@ -6,14 +6,6 @@
 
 
   tasks:
-
-  - name: SHOW RUN | INC SNMP ON {{ ansible_ssh_host }}
-    ios_command:
-      commands:
-        - show run | i snmp
-    register: before_snmp
- 
-  - debug: var=before_snmp.stdout_lines
  
   - name: SET COMMUNITY STRING ON {{ ansible_ssh_host }}
     ios_config:
@@ -49,11 +41,5 @@
         - snmp-server host 192.168.161.25 pwdhere
 
 
-  - name: SHOW RUN | INC SNMP ON {{ ansible_ssh_host }}
-    ios_command:
-      commands:
-        - show run | i snmp
-    register: after_snmp
- 
-  - debug: var=after_snmp.stdout_lines
+
 
