@@ -5,16 +5,16 @@
 
   tasks:
 
-  - name: CONFIGURE BANNER ON {{ ansible_ssh_host }}
+  - name: CONFIGURE BANNER ON CISCO DEVICES
     ios_banner:
       banner: login
       text: "{{ lookup('file', './vars/raw_banner.cfg') }}"
       state: present
 
-  - name: SHOW RUN | BEG BANNER ON {{ ansible_ssh_host }}
+  - name: SHOW RUN | SEC BANNER 
     ios_command:
       commands:
-        - show run | beg banner
+        - show run | sec banner
     register: banner
 
   - debug: var=banner.stdout_lines
