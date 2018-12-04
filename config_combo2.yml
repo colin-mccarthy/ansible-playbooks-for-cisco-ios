@@ -53,10 +53,4 @@
       lines:
         - logging buffered 15000
         
-  - name: SHOW RUN | BEG VTY ON 
-    ios_command:
-      commands:
-        - show run | beg vty
-    register: after_vty
- 
-  - debug: var=after_vty.stdout_lines
+
