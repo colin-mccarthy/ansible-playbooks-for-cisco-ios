@@ -23,7 +23,7 @@
       lines:
         - snmp-server contact colin@thenetwork.engineer
 
-  - name: ENABLE TRAPS ON {{ ansible_host }}
+  - name: ENABLE OSPF TRAPS 
     ios_config:
       lines:
         - snmp-server enable traps ospf state-change
