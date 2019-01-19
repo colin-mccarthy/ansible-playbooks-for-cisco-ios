@@ -8,7 +8,7 @@
 
 
   tasks:           
-     - name: Verify VLAN
-       ios_command:
-         commands:
-           - sh run int "{{ interface }}"
+  - name: Verify VLAN
+    ios_command:
+      commands:
+        - sh run int "{{ interface }}"
