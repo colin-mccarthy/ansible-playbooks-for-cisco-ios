@@ -10,12 +10,10 @@
     ntp_servers:
       - ntp server 216.239.35.0
       - ntp server 216.239.35.4
+      
+      
 
   tasks:
-  - name: BACKUP
-    ios_config:
-      backup: yes
-
   - name: "GET CONFIG"
     ios_command:
       commands:
