@@ -1,7 +1,7 @@
 ---
 - hosts: ios
   gather_facts: no
-  connection: network_cli
+
 
   vars:
     dns_servers:
@@ -63,9 +63,4 @@
     when: "(set_ntp.changed == true) or (remove_ntp.changed == true)"
     set_fact: configured=true
 
-  - name: RUN 'wr mem'
-    when: "(configured is defined) and (configured == true)"
-    register: save_config
-    ios_command:
-      commands:
-        - "write memory"
+
