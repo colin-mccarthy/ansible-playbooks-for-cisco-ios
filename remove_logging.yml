@@ -4,8 +4,8 @@
   
   vars:
     log_servers:
-      - log-server 8.8.8.8
-      - log-server 8.8.4.4
+      - logging 8.8.8.8
+      - logging 8.8.4.4
 
 
   tasks:
