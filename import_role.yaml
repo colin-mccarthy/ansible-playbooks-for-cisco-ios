@@ -1,6 +1,5 @@
 ---
  - hosts: ios
-   connection: networkcli
    gather_facts: no
    
    tasks:
