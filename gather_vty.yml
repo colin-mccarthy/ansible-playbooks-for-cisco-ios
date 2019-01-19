@@ -1,7 +1,7 @@
 ---
 - hosts: ios
   gather_facts: no
-  connection: network_cli
+
 
   tasks:
   - name: REGISTER VTY CONFIG ON DEVICE
