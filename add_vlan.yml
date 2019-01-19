@@ -1,9 +1,9 @@
 ---
 - hosts: ios
   gather_facts: no
-  connection: network_cli
 
-# {{vlan}} input  will be a survey in Ansible Tower
+
+# {{vlan}} & {{ interface }} input  will be a survey in Ansible Tower
 
 
   tasks:
@@ -17,13 +17,13 @@
        ios_vlan:
          vlan_id: "{{ vlan }}"
          interfaces:
-           - GigabitEthernet0/10
-           - GigabitEthernet0/11
+           - "{{ interface }}"
+         
 
      - name: Check if interfaces is assigned to VLAN
        ios_vlan:
          vlan_id: "{{ vlan }}"
          associated_interfaces:
-           - GigabitEthernet0/10
-           - GigabitEthernet0/11
+           - "{{ interface }}"
+         
 
