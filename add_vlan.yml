@@ -7,7 +7,7 @@
 
 
   tasks:
-     - name: Create vlan
+     - name: Create VLAN
        ios_vlan:
          vlan_id: "{{ vlan }}"
          name: test-vlan
@@ -18,12 +18,13 @@
          vlan_id: "{{ vlan }}"
          interfaces:
            - "{{ interface }}"
+           
+     - name: Verify VLAN
+       ios_command:
+         commands:
+           - sh run int "{{ interface }}"
+                  
          
 
-     - name: Check if interfaces is assigned to VLAN
-       ios_vlan:
-         vlan_id: "{{ vlan }}"
-         associated_interfaces:
-           - "{{ interface }}"
          
 
