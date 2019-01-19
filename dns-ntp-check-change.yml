@@ -8,8 +8,8 @@
       - ip name-server 8.8.8.8
       - ip name-server 8.8.4.4
     ntp_servers:
-      - ntp server uk.pool.ntp.org
-      - ntp server time.apple.com
+      - ntp server 216.239.35.0
+      - ntp server 216.239.35.4
 
   tasks:
   - name: BACKUP
@@ -20,7 +20,7 @@
     ios_command:
       commands:
         - "show running-config | include ip name-server"
-        - "show running-config | include ntp server"
+        - "show running-config uk.pool.ntp.org| include ntp server"
     register: get_config
 
   - debug: var=get_config.stdout_lines
