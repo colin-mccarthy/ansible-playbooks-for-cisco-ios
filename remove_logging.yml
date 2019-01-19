@@ -8,7 +8,7 @@
   ios_command:
     lines:
       - show run | include logging \d+/.\d+/.\d+/.\d+
-      register: log_servers
+  register: log_servers
       
   - name: "Remove unnecessary ones"
     ios_config:
