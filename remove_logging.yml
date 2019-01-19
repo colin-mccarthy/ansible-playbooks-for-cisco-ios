@@ -20,6 +20,6 @@
   - name: "Remove unnecessary ones"
     ios_config:
       commands: "no {{ item }}"
-    when:  " {{ item }} not in log_servers"
+    when:  "item not in log_servers"
     loop: "{{ log_servers.stdout_lines[0]}}"
 
