@@ -2,7 +2,7 @@
 - name: ios
   hosts: all
   gather_facts: no
-  connection: network_cli
+
 
 
   tasks:
@@ -10,7 +10,7 @@
   - name: SET COMMUNITY STRING 
     ios_config:
       lines:
-        - snmp-server community thenetwork.engineer
+        - snmp-server community ansibull RO 99
 
   - name: TRAP-SOURCE LOOPBACK0 
     ios_config:
@@ -38,7 +38,7 @@
   - name: SET SNMP SERVER ADDRESS 
     ios_config:
       lines:
-        - snmp-server host 192.168.161.25 pwdhere
+        - snmp-server host 192.168.161.110 version 2c public udp-port 161
 
 
 
