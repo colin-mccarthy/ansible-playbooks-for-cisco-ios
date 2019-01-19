@@ -18,7 +18,7 @@
     ios_command:
       commands:
         - "show running-config | include ip name-server"
-        - "show running-config uk.pool.ntp.org| include ntp server"
+        - "show running-config | include ntp server"
     register: get_config
 
   - debug: var=get_config.stdout_lines
