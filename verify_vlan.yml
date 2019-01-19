@@ -10,7 +10,7 @@
      - name: Verify VLAN
        ios_command:
          commands: 
-           - show run int "{{ interface }}"           
+           - show run int Fa0/3          
        register: int
 
      - debug: var=int.stdout_lines   
