@@ -13,9 +13,10 @@
     ios_command:
       commands:
         - show run | include logging 
-    register: log_servers
+    register: log
     
-  - debug: var=log_servers.stdout_lines
+  - debug: var=log.stdout_lines
+
       
   - name: "Remove unnecessary ones"
     ios_config:
