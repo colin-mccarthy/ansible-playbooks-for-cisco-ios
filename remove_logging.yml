@@ -1,0 +1,19 @@
+---
+- hosts: ios
+  gather_facts: no
+
+
+  tasks:
+  - name: "capture existing logging servers"
+  ios_command:
+    lines:
+	  - show run | include logging \d+/.\d+/.\d+/.\d+
+	register: log_servers
+
+	
+
+  - name: "Remove unnecessary ones"
+    ios_config:
+      commands: " no {{ item }}"
+    when: "'X.X.X.X' not in item"
+    loop: "{{ log_servers }}"
