@@ -4,6 +4,7 @@
 
  
   tasks: 
+  
   - name: CHANGE VTP MODE
     ios_config:
       lines:
