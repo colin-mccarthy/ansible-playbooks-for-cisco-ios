@@ -5,10 +5,10 @@
 
   tasks:
   - name: "capture existing logging servers"
-  ios_command:
-    lines:
-      - show run | include logging \d+/.\d+/.\d+/.\d+
-  register: log_servers
+    ios_command:
+      lines:
+        - show run | include logging \d+/.\d+/.\d+/.\d+
+    register: log_servers
       
   - name: "Remove unnecessary ones"
     ios_config:
