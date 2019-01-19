@@ -21,8 +21,11 @@
            
      - name: Verify VLAN
        ios_command:
-         commands:
-           - sh run int "{{ interface }}"
+         commands: 
+           - show run int {{ interface }}          
+       register: int
+
+     - debug: var=int.stdout_lines  
                   
          
 
