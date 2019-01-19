@@ -1,8 +1,6 @@
 ---
-- name: CHANGE VTP MODE
-  hosts: ios
+- hosts: ios
   gather_facts: no
-  connection: network_cli
 
  
   tasks: 
