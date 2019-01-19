@@ -1,6 +1,5 @@
 ---
-- name: ios
-  hosts: all
+- hosts: all
   gather_facts: no
 
 
