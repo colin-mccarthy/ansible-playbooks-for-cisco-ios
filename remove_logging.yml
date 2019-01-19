@@ -12,7 +12,7 @@
   - name: "capture existing logging servers"
     ios_command:
       commands:
-        - show run | include logging 
+        - show run | include logging \d+\.\d+\.\d+\.\d+
     register: log
     
   - debug: var=log.stdout_lines
