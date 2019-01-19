@@ -8,10 +8,10 @@
     ios_command:
       commands:
         - show run | include logging \d+/.\d+/.\d+/.\d+
-    register: log_servers
+    register: log_servers.stdout
       
   - name: "Remove unnecessary ones"
     ios_config:
       commands: " no {{ item }}"
     when: "'X.X.X.X' not in item"
-    loop: "{{ log_servers }}"
+    loop: "{{ log_servers.stdout_lines[0] }}"
