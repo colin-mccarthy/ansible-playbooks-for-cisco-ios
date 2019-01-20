@@ -9,6 +9,12 @@
 
 
   tasks:
+  
+  - name: "Add intended ones"
+    ios_config:
+      commands: "{{ item }}"
+    loop: "{{ log_servers }}"
+        
   - name: "capture existing logging servers"
     ios_command:
       commands:
