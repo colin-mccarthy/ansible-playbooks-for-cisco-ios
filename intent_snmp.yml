@@ -1,0 +1,47 @@
+---
+- hosts: ios
+  gather_facts: no
+
+
+  vars:
+  
+    snmp-server:
+      - snmp-server community ansibull RO 99
+      - snmp-server trap-source Loopback0
+      - snmp-server contact noc@yourcompany.com
+      - snmp-server enable traps ospf state-change
+      - snmp-server enable traps ospf errors
+      - snmp-server enable traps ospf retransmit
+      - snmp-server enable traps ospf lsa
+      - snmp-server host 192.168.161.110 version 2c public udp-port 161
+      
+      
+
+  tasks:
+  
+  - name: "GET CONFIG"
+    ios_command:
+      commands:
+        - "show running-config | include snmp-server"
+    register: get_config
+
+  - debug: var=get_config.stdout_lines
+
+  - name: RUN 'Set SNMP'
+    with_items: "{{ snmp-server }}"
+    ios_config:
+      lines:
+        - "{{ item }}"
+    register: set_snmp
+
+  - name: RUN 'Remove SNMP'
+    when: "(get_config.stdout_lines[0] != '') and (item not in snmp-server)"
+    with_items: "{{ get_config.stdout_lines[0] }}"
+    register: remove_snmp
+    ios_config:
+      lines:
+        - "no {{ item }}"
+
+  - name: CHECK CHANGE - snmp
+    when: "(set_snmp.changed == true) or (remove_snmp.changed == true)"
+    set_fact: configured=true
