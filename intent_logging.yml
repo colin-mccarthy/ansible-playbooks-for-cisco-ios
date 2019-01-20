@@ -28,5 +28,5 @@
     ios_config:
       commands: "no {{ item }}"
     when:  "item not in log_servers"
-    loop: "{{ log.stdout_lines[0]}}"
+    loop: "{{ log.stdout_lines[0] }}"
 
