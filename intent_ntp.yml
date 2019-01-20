@@ -1,0 +1,46 @@
+---
+- hosts: ios
+  gather_facts: no
+
+
+  vars:
+  
+    ntp_servers:
+      - ntp server 216.239.35.0
+      - ntp server 216.239.35.4
+      
+      
+
+  tasks:
+  
+  - name: "GET CONFIG"
+    ios_command:
+      commands:
+        - "show running-config | include ntp server"
+    register: get_config
+
+  - debug: var=get_config.stdout_lines
+
+  - name: RUN 'Set NTP'
+    with_items: "{{ ntp_servers }}"
+    ios_config:
+      lines:
+          - "{{ item }}"
+    register: set_ntp
+
+  - name: RUN 'Remove NTP'
+    when: "(get_config.stdout_lines[1][0] != '') and (item not in ntp_servers)"
+    with_items: "{{ get_config.stdout_lines[1] }}"
+    register: remove_ntp
+    ios_config:
+      lines:
+        - "no {{ item }}"
+
+  - name: CHECK CHANGE - ntp
+    when: "(set_ntp.changed == true) or (remove_ntp.changed == true)"
+    set_fact: configured=true
+    
+    
+    
+    
+    
