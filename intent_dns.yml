@@ -1,0 +1,43 @@
+---
+- hosts: ios
+  gather_facts: no
+
+
+  vars:
+  
+    dns_servers:
+      - ip name-server 8.8.8.8
+      - ip name-server 8.8.4.4
+      
+      
+
+  tasks:
+  
+  - name: "GET CONFIG"
+    ios_command:
+      commands:
+        - "show running-config | include ip name-server"
+        - "show running-config | include ntp server"
+    register: get_config
+
+  - debug: var=get_config.stdout_lines
+
+  - name: RUN 'Set DNS'
+    with_items: "{{ dns_servers }}"
+    ios_config:
+      lines:
+        - "{{ item }}"
+    register: set_dns
+
+  - name: RUN 'Remove DNS'
+    when: "(get_config.stdout_lines[0] != '') and (item not in dns_servers)"
+    with_items: "{{ get_config.stdout_lines[0] }}"
+    register: remove_dns
+    ios_config:
+      lines:
+        - "no {{ item }}"
+
+  - name: CHECK CHANGE - dns
+    when: "(set_dns.changed == true) or (remove_dns.changed == true)"
+    set_fact: configured=true
+
