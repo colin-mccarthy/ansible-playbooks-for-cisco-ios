@@ -5,7 +5,7 @@
 
   vars:
   
-    snmp-server:
+    snmp_server:
       - snmp-server community ansibull RO 99
       - snmp-server trap-source Loopback0
       - snmp-server contact noc@yourcompany.com
@@ -22,20 +22,20 @@
   - name: "GET CONFIG"
     ios_command:
       commands:
-        - "show running-config | include snmp-server"
+        - "show running-config | include snmp_server"
     register: get_config
 
   - debug: var=get_config.stdout_lines
 
   - name: RUN 'Set SNMP'
-    with_items: "{{ snmp-server }}"
+    with_items: "{{ snmp_server }}"
     ios_config:
       lines:
         - "{{ item }}"
     register: set_snmp
 
   - name: RUN 'Remove SNMP'
-    when: "(get_config.stdout_lines[0] != '') and (item not in snmp-server)"
+    when: "(get_config.stdout_lines[0] != '') and (item not in snmp_server)"
     with_items: "{{ get_config.stdout_lines[0] }}"
     register: remove_snmp
     ios_config:
