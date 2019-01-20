@@ -30,7 +30,7 @@
 
   - name: RUN 'Remove NTP'
     when: "(get_config.stdout_lines[0] != '') and (item not in ntp_servers)"
-    with_items: "{{ get_config.stdout_lines[1] }}"
+    with_items: "{{ get_config.stdout_lines[0] }}"
     register: remove_ntp
     ios_config:
       lines:
