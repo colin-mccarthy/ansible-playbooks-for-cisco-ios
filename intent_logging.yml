@@ -3,6 +3,7 @@
   gather_facts: no
   
   vars:
+  
     log_servers:
       - logging 8.8.8.8
       - logging 8.8.4.4
@@ -22,8 +23,7 @@
     register: log
     
   - debug: var=log.stdout_lines
-
-      
+     
   - name: RUN 'Remove Logging'
     ios_config:
       commands: "no {{ item }}"
