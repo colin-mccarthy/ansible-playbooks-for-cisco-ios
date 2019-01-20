@@ -14,7 +14,6 @@
   - name: TRAP-SOURCE LOOPBACK0 
     ios_config:
       lines:
-         - int lo0
          - snmp-server trap-source Loopback0
 
   - name: SET CONTACT INFO 
