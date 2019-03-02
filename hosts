@@ -1,6 +1,5 @@
-
 [ios]
-192.168.161.15  ansible_ssh_host=192.168.161.15  
+192.168.161.9  ansible_ssh_host=192.168.161.9  
 
 [ios:vars]
 

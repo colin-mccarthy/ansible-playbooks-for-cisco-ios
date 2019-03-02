@@ -15,6 +15,7 @@
     ios_config:
       commands: "{{ item }}"
     loop: "{{ log_servers }}"
+    register: set_logging
         
   - name: "GET CONFIG"
     ios_command:
@@ -29,4 +30,15 @@
       commands: "no {{ item }}"
     when:  "item not in log_servers"
     loop: "{{ log.stdout_lines[0] }}"
+    register: remove_logging
+
+  - name: CHECK CHANGE - logging
+    when: set_logging.changed or remove_logging.changed
+    set_fact: configured=true
+
+  - debug: var=configured
+
+
+
+
 

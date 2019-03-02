@@ -43,5 +43,7 @@
         - "no {{ item }}"
 
   - name: CHECK CHANGE - snmp
-    when: "(set_snmp.changed == true) or (remove_snmp.changed == true)"
+    when: set_snmp.changed or remove_snmp.changed 
     set_fact: configured=true
+
+  - debug: var=configured

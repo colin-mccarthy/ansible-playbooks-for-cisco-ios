@@ -18,6 +18,7 @@
       commands:
         - "show running-config | include ip name-server"
     register: get_config
+    when: 
 
   - debug: var=get_config.stdout_lines
 
@@ -37,6 +38,7 @@
         - "no {{ item }}"
 
   - name: CHECK CHANGE - dns
-    when: "(set_dns.changed == true) or (remove_dns.changed == true)"
+    when: set_dns.changed or remove_dns.changed
     set_fact: configured=true
-
+  
+  - debug: var=configured
