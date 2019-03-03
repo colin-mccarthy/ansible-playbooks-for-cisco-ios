@@ -11,7 +11,7 @@
       - aaa authentication enable default group tacacs+ enable
       - aaa authorization config-commands
       - 'aaa authorization exec default group tacacs+ local '
-      - 'aaa authorization commands 1 default group tacacs+ none '
+      - 'aaa authorization commands 1 default group tacacs+ none ' 
       - 'aaa authorization commands 15 default group tacacs+ none '
       - aaa accounting exec default start-stop group tacacs+
       - aaa accounting network default start-stop group tacacs+
@@ -24,7 +24,7 @@
   - name: "GET CONFIG"
     ios_command:
       commands:
-        - "show running-config | include aaa"
+        - "show running-config full | include aaa"
     register: get_config
 
   - debug: var=get_config.stdout_lines

@@ -16,7 +16,7 @@
   - name: "GET CONFIG"
     ios_command:
       commands:
-        - "show running-config | include ip name-server"
+        - "show running-config full | include ip name-server"
     register: get_config
     when: 
 

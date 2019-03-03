@@ -16,7 +16,7 @@
   - name: "GET CONFIG"
     ios_command:
       commands:
-        - "show running-config | include ntp server"
+        - "show running-config full | include ntp server"
     register: get_config
 
   - debug: var=get_config.stdout_lines

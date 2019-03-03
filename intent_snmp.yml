@@ -22,7 +22,7 @@
   - name: "GET CONFIG"
     ios_command:
       commands:
-        - "show running-config | include snmp-server"
+        - "show running-config full | include snmp-server"
     register: get_config
 
   - debug: var=get_config.stdout_lines
