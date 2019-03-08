@@ -15,7 +15,7 @@
   scm: git
   version: devel 
 
-- name: bachup_configs
+- name: backup_configs
   src: https://github.com/colin-mccarthy/backup_configs
   scm: git
   version: master
