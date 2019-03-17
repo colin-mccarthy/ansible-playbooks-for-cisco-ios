@@ -11,34 +11,31 @@
 
   tasks:
   
-  - name: RUN 'Set Logging'
-    ios_config:
-      commands: "{{ item }}"
-    loop: "{{ log_servers }}"
-    register: set_logging
-        
-  - name: "GET CONFIG"
+  - name: get the current log server configs 
     ios_command:
       commands:
         - show running-config full | include logging [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+
     register: log
-    
+
   - debug: var=log.stdout_lines
+
+
+  - name: set logging commands
+    ios_config:
+      commands: "{{ item }}"
+    loop: "{{ log_servers }}"
+    register: set_logging
+    
      
-  - name: RUN 'Remove Logging'
+  - name: remove logging commands
     ios_config:
       commands: "no {{ item }}"
     when:  "item not in log_servers"
     loop: "{{ log.stdout_lines[0] }}"
     register: remove_logging
 
-  - name: CHECK CHANGE - logging
-    when: set_logging.changed or remove_logging.changed
-    set_fact: configured=true
 
-  - debug: var=configured
-
-
-
-
-
+  - name: servicenow_network_tickets
+    when: set_snmp.changed or remove_snmp.changed 
+    import_role:
+      name: servicenow_network_tickets

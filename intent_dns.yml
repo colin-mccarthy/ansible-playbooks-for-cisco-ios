@@ -13,7 +13,7 @@
 
   tasks:
   
-  - name: "GET CONFIG"
+  - name: get the current name-server configs
     ios_command:
       commands:
         - "show running-config full | include ip name-server"
@@ -22,14 +22,14 @@
 
   - debug: var=get_config.stdout_lines
 
-  - name: RUN 'Set DNS'
+  - name: set name-server commands
     with_items: "{{ dns_servers }}"
     ios_config:
       lines:
         - "{{ item }}"
     register: set_dns
 
-  - name: RUN 'Remove DNS'
+  - name: remove name-server commands
     when: "(get_config.stdout_lines[0] != '') and (item not in dns_servers)"
     with_items: "{{ get_config.stdout_lines[0] }}"
     register: remove_dns
@@ -37,8 +37,7 @@
       lines:
         - "no {{ item }}"
 
-  - name: CHECK CHANGE - dns
-    when: set_dns.changed or remove_dns.changed
-    set_fact: configured=true
-  
-  - debug: var=configured
+  - name: servicenow_network_tickets
+    when: set_snmp.changed or remove_snmp.changed 
+    import_role:
+      name: servicenow_network_tickets

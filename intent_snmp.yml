@@ -19,7 +19,7 @@
 
   tasks:
   
-  - name: "GET CONFIG"
+  - name: get the current snmp-server config
     ios_command:
       commands:
         - "show running-config full | include snmp-server"
@@ -27,14 +27,14 @@
 
   - debug: var=get_config.stdout_lines
 
-  - name: RUN 'Set SNMP'
+  - name: set snmp-server configs
     with_items: "{{ snmp_server }}"
     ios_config:
       lines:
         - "{{ item }}"
     register: set_snmp
 
-  - name: RUN 'Remove SNMP'
+  - name: remove snmp-server configs
     when: "(get_config.stdout_lines[0] != '') and (item not in snmp_server)"
     with_items: "{{ get_config.stdout_lines[0] }}"
     register: remove_snmp
@@ -42,8 +42,7 @@
       lines:
         - "no {{ item }}"
 
-  - name: CHECK CHANGE - snmp
+  - name: servicenow_network_tickets
     when: set_snmp.changed or remove_snmp.changed 
-    set_fact: configured=true
-
-  - debug: var=configured
+    import_role:
+      name: servicenow_network_tickets
