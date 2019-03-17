@@ -20,3 +20,8 @@
   scm: git
   version: master
 
+- name: servicenow_network_tickets
+  src: https://github.com/colin-mccarthy/servicenow_network_tickets
+  scm: git
+  version: devel
+

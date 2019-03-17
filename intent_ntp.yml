@@ -13,7 +13,7 @@
 
   tasks:
   
-  - name: "GET CONFIG"
+  - name: get the current ntp server configs
     ios_command:
       commands:
         - "show running-config full | include ntp server"
@@ -21,14 +21,14 @@
 
   - debug: var=get_config.stdout_lines
 
-  - name: RUN 'Set NTP'
+  - name: set ntp server commands
     with_items: "{{ ntp_servers }}"
     ios_config:
       lines:
           - "{{ item }}"
     register: set_ntp
 
-  - name: RUN 'Remove NTP'
+  - name: remove ntp server commands
     when: "(get_config.stdout_lines[0] != '') and (item not in ntp_servers)"
     with_items: "{{ get_config.stdout_lines[0] }}"
     register: remove_ntp
@@ -36,13 +36,7 @@
       lines:
         - "no {{ item }}"
 
-  - name: CHECK CHANGE - ntp
+  - name: servicenow_network_tickets
     when: set_ntp.changed or remove_ntp.changed
-    set_fact: configured=true
-
-  - debug: var=configured
-    
-    
-    
-    
-    
+    import_role:
+      name: servicenow_network_tickets

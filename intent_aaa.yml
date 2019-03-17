@@ -21,7 +21,7 @@
 
   tasks:
   
-  - name: "GET CONFIG"
+  - name: get the current aaa configs
     ios_command:
       commands:
         - "show running-config full | include aaa"
@@ -29,14 +29,14 @@
 
   - debug: var=get_config.stdout_lines
 
-  - name: RUN 'Set aaa'
+  - name: set aaa configs
     with_items: "{{ aaa_configs }}"
     ios_config:
       lines:
         - "{{ item }}"
     register: set_aaa
 
-  - name: RUN 'Remove aaa'
+  - name: remove aaa configs
     when: "(get_config.stdout_lines[0] != '') and (item not in aaa_configs)"
     with_items: "{{ get_config.stdout_lines[0] }}"
     register: remove_aaa
@@ -44,8 +44,7 @@
       lines:
         - "no {{ item }}"
 
-  - name: CHECK CHANGE - aaa
-    when: set_aaa.changed or remove_aaa.changed 
-    set_fact: configured=true
-
-  - debug: var=configured
+  - name: servicenow_network_tickets
+    when: set_snmp.changed or remove_snmp.changed 
+    import_role:
+      name: servicenow_network_tickets
