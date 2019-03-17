@@ -1,0 +1,15 @@
+---
+- hosts: ios
+  gather_facts: no
+
+
+  tasks:
+     - name: net_put test
+       net_put:
+         src: ansible.cfg
+
+                  
+         
+
+         
+
