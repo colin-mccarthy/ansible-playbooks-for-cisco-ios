@@ -45,6 +45,6 @@
         - "no {{ item }}"
 
   - name: servicenow_network_tickets
-    when: set_snmp.changed or remove_snmp.changed 
+    when: set_aaa.changed or remove_aaa.changed 
     import_role:
       name: servicenow_network_tickets
