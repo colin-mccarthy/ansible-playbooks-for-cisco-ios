@@ -1,0 +1,15 @@
+---
+- hosts: ios
+  become: yes
+  
+  tasks:
+  
+    - name: register the results of a show command
+      ios_command: 
+        commands: "show interfaces description"
+      register: interface_description
+
+    - name: copy register to a file
+      copy:
+        content: "{{ interface_description.stdout[0] }}"
+        dest: "files/{{ inventory_hostname }}.txt"

@@ -1,0 +1,32 @@
+Interface                      Status         Protocol Description
+Vl1                            admin down     down     
+Fa0/1                          up             up       
+Fa0/2                          down           down     
+Fa0/3                          down           down     
+Fa0/4                          down           down     
+Fa0/5                          down           down     
+Fa0/6                          down           down     
+Fa0/7                          down           down     
+Fa0/8                          down           down     
+Fa0/9                          down           down     
+Fa0/10                         down           down     
+Fa0/11                         down           down     
+Fa0/12                         down           down     
+Fa0/13                         down           down     
+Fa0/14                         down           down     
+Fa0/15                         down           down     
+Fa0/16                         down           down     
+Fa0/17                         down           down     
+Fa0/18                         down           down     
+Fa0/19                         down           down     
+Fa0/20                         down           down     
+Fa0/21                         down           down     
+Fa0/22                         down           down     
+Fa0/23                         down           down     
+Fa0/24                         down           down     
+Gi0/1                          down           down     
+Gi0/2                          down           down     
+Po1                            down           down     
+Lo0                            up             up       
+Lo2                            up             up       loopback example
+Lo3                            up             up       loopback example
