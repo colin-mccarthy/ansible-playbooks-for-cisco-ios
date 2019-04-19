@@ -3,7 +3,7 @@
 
 [ios:vars]
 
-ansible_pass=cisco
+ansible_ssh_pass=cisco
 ansible_user=pi
 ansible_network_os=ios
 ansible_connection=network_cli
