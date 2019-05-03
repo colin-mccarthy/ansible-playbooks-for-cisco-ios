@@ -1,0 +1,85 @@
+GigabitEthernet0/0 is up, line protocol is up 
+  Hardware is iGbE, address is 5e00.0002.0000 (bia 5e00.0002.0000)
+  Description: OOB Management
+  Internet address is 10.8.38.65/24
+  MTU 1500 bytes, BW 1000000 Kbit/sec, DLY 10 usec, 
+     reliability 253/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, loopback not set
+  Keepalive set (10 sec)
+  Full Duplex, Auto Speed, link type is auto, media type is RJ45
+  output flow-control is unsupported, input flow-control is unsupported
+  ARP type: ARPA, ARP Timeout 04:00:00
+  Last input 00:00:00, output 00:00:00, output hang never
+  Last clearing of "show interface" counters never
+  Input queue: 0/75/0/0 (size/max/drops/flushes); Total output drops: 0
+  Queueing strategy: fifo
+  Output queue: 0/40 (size/max)
+  5 minute input rate 2000 bits/sec, 2 packets/sec
+  5 minute output rate 2000 bits/sec, 2 packets/sec
+     4973387 packets input, 816226566 bytes, 0 no buffer
+     Received 228869 broadcasts (0 IP multicasts)
+     461509 runts, 0 giants, 0 throttles 
+     461509 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
+     0 watchdog, 0 multicast, 0 pause input
+     3316083 packets output, 432440225 bytes, 0 underruns
+     0 output errors, 0 collisions, 3 interface resets
+     2303378 unknown protocol drops
+     0 babbles, 0 late collision, 0 deferred
+     1 lost carrier, 0 no carrier, 0 pause output
+     0 output buffer failures, 0 output buffers swapped out
+GigabitEthernet0/1 is up, line protocol is up
+  Hardware is iGbE, address is fa16.3e4e.c5e5 (bia fa16.3e4e.c5e5)
+  Description: test-interface
+  MTU 2000 bytes, BW 1000000 Kbit/sec, DLY 10 usec, 
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, loopback not set
+  Keepalive set (10 sec)
+  Full Duplex, 1Gbps, link type is auto, media type is RJ45
+  output flow-control is unsupported, input flow-control is unsupported
+  ARP type: ARPA, ARP Timeout 04:00:00
+  Last input 4d07h, output 4d07h, output hang never
+  Last clearing of "show interface" counters never
+  Input queue: 0/75/0/0 (size/max/drops/flushes); Total output drops: 0
+  Queueing strategy: fifo
+  Output queue: 0/40 (size/max)
+  5 minute input rate 0 bits/sec, 0 packets/sec
+  5 minute output rate 0 bits/sec, 0 packets/sec
+     89815 packets input, 27598643 bytes, 0 no buffer
+     Received 1 broadcasts (0 IP multicasts)
+     0 runts, 0 giants, 0 throttles 
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
+     0 watchdog, 0 multicast, 0 pause input
+     404016 packets output, 27896846 bytes, 0 underruns
+     0 output errors, 0 collisions, 51 interface resets
+     89728 unknown protocol drops
+     0 babbles, 0 late collision, 0 deferred
+     28 lost carrier, 0 no carrier, 0 pause output
+     0 output buffer failures, 0 output buffers swapped out
+GigabitEthernet0/2 is up, line protocol is up 
+  Hardware is iGbE, address is fa16.3eca.c938 (bia fa16.3eca.c938)
+  Description: test-interface-2
+  MTU 2000 bytes, BW 1000000 Kbit/sec, DLY 10 usec, 
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, loopback not set
+  Keepalive set (10 sec)
+  Full Duplex, 1Gbps, link type is auto, media type is RJ45
+  output flow-control is unsupported, input flow-control is unsupported
+  ARP type: ARPA, ARP Timeout 04:00:00
+  Last input 3w1d, output 00:00:08, output hang never
+  Last clearing of "show interface" counters never
+  Input queue: 0/75/0/0 (size/max/drops/flushes); Total output drops: 0
+  Queueing strategy: fifo
+  Output queue: 0/40 (size/max)
+  5 minute input rate 0 bits/sec, 0 packets/sec
+  5 minute output rate 0 bits/sec, 0 packets/sec
+     487240 packets input, 36339153 bytes, 0 no buffer
+     Received 8 broadcasts (0 IP multicasts)
+     183253 runts, 0 giants, 0 throttles 
+     183253 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
+     0 watchdog, 0 multicast, 0 pause input
+     1115575 packets output, 73936479 bytes, 0 underruns
+     0 output errors, 0 collisions, 12 interface resets
+     0 unknown protocol drops
+     0 babbles, 0 late collision, 0 deferred
+     5 lost carrier, 0 no carrier, 0 pause output
+     0 output buffer failures, 0 output buffers swapped out

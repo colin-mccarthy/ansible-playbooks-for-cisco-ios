@@ -1,0 +1,28 @@
+---
+
+  - name: Include task list in play
+    include_tasks: "files/{{ ansible_network_os }}_tasks.yaml"
+
+
+  - name: parse show version
+    command_parser:
+      file: "files/{{ ansible_network_os }}_version.yaml"
+      content: "{{ version.stdout.0 }}"
+
+
+  - name: Create an incident
+    snow_record:
+      state: present
+      table: incident
+      username: "{{ SN_USERNAME }}"
+      password: "{{ SN_PASSWORD }}"
+      instance: "{{ SN_INSTANCE }}"
+      data:
+        priority: "{{ priority}}"
+        u_device_up_time: "{{ system_facts.uptime }}"
+        u_ios_version: "{{ system_facts.version }}"
+        u_hostname: "{{ inventory_hostname }}"
+        short_description: "This ticket was created by Ansible"
+    register: new_incident
+
+  - debug: var=new_incident.record.number

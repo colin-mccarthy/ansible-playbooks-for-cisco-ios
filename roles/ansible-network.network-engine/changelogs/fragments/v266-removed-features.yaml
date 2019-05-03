@@ -1,0 +1,3 @@
+---
+removed_features:
+  - Remove deprecated module ``cli_get``

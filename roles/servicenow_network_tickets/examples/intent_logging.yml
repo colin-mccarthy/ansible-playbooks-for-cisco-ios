@@ -1,0 +1,41 @@
+---
+- hosts: ios
+  gather_facts: no
+  
+  vars:
+  
+    log_servers:
+      - logging 8.8.8.8
+      - logging 8.8.4.4
+
+
+  tasks:
+  
+  - name: get the current log server configs 
+    ios_command:
+      commands:
+        - show running-config full | include logging [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+
+    register: log
+
+  - debug: var=log.stdout_lines
+
+
+  - name: set logging commands
+    ios_config:
+      commands: "{{ item }}"
+    loop: "{{ log_servers }}"
+    register: set_logging
+    
+     
+  - name: remove logging commands
+    ios_config:
+      commands: "no {{ item }}"
+    when:  "item not in log_servers"
+    loop: "{{ log.stdout_lines[0] }}"
+    register: remove_logging
+
+
+  - name: servicenow_network_tickets
+    when: set_logging.changed or remove_logging.changed 
+    import_role:
+      name: servicenow_network_tickets

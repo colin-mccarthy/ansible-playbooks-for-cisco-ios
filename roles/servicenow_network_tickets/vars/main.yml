@@ -1,0 +1,23 @@
+---
+
+#fill these out with your info and un comment them
+
+#auth variables
+
+# SN_USERNAME: 
+# SN_PASSWORD: 
+# SN_INSTANCE: 
+
+state: present
+
+#data variables
+
+#incident
+severity: 2
+priority: 2
+category: network
+
+#network host
+company: "E-Corp"
+device_type: switch
+assigned_to: "Abel Tuter"

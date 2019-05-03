@@ -1,0 +1,4 @@
+---
+new_lookup_plugins:
+  - NEW ``config_template`` lookup plugin
+  - NEW ``yang_json2xml`` lookup plugin

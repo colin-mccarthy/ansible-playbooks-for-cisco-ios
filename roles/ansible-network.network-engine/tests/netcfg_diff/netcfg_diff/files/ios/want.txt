@@ -1,0 +1,138 @@
+Building configuration...
+
+
+Current configuration : 7250 bytes
+!
+! Last configuration change at 01:37:00 UTC Sun May 27 2018 by ansible
+!
+version 15.6
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname ios01
+!
+boot-start-marker
+boot-end-marker
+!
+!
+vrf definition Mgmt-intf
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+no logging buffered
+no logging console
+!
+crypto pki trustpoint example.com
+ enrollment selfsigned
+ subject-name cn=samsung-ubuntu.actionmystique.net-Certificate
+ revocation-check none
+ rsakeypair example.com
+!
+crypto pki certificate chain example.com
+username cisco privilege 15 secret 5 $1$u6jn$cZ5bnTL3wGFL3362agGH11
+username ansible privilege 15 secret 5 $1$R503$jIYk.0/0/toCal0O08Yr70
+username test
+!
+redundancy
+!
+no cdp run
+!
+interface Loopback0
+ description Loopback
+ ip address 192.168.255.2 255.255.255.255
+!
+interface GigabitEthernet0/0
+ description OOB Management
+ vrf forwarding Mgmt-intf
+ ip address 20.20.20.20 255.255.255.0
+ duplex full
+ speed auto
+ media-type rj45
+!
+interface GigabitEthernet0/1
+ description test-interface
+ mtu 2000
+ no ip address
+ ip ospf cost 1
+ shutdown
+ duplex full
+ speed 1000
+ media-type rj45
+!
+router ospf 1
+ passive-interface Loopback0
+ network 172.31.0.8 0.0.0.3 area 0
+ network 172.31.0.12 0.0.0.3 area 0
+ network 172.31.0.24 0.0.0.3 area 0
+ network 192.168.255.2 0.0.0.0 area 0
+!
+router bgp 1
+ template peer-session IBGP
+  remote-as 65001
+  update-source Loopback0
+ exit-peer-session
+ !
+ bgp router-id 192.168.255.2
+ bgp log-neighbor-changes
+ neighbor 192.168.255.1 remote-as 1
+ neighbor 192.168.255.1 description iBGP peer nxos01
+ neighbor 192.168.255.1 update-source Loopback0
+ neighbor 192.168.255.4 remote-as 1
+ neighbor 192.168.255.4 description iBGP peer csr01
+ neighbor 192.168.255.4 update-source Loopback0
+ neighbor 192.168.255.5 remote-as 1
+ neighbor 192.168.255.5 description iBGP peer iosxr01
+ neighbor 192.168.255.5 update-source Loopback0
+ neighbor 192.168.255.6 remote-as 1
+ neighbor 192.168.255.6 description iBGP peer nxos02
+ neighbor 192.168.255.6 update-source Loopback0
+ neighbor 192.168.255.7 remote-as 1
+ neighbor 192.168.255.7 description iBGP peer csr02
+ neighbor 192.168.255.7 update-source Loopback0
+ neighbor 192.168.255.8 remote-as 1
+ neighbor 192.168.255.8 description iBGP peer ios02
+ neighbor 192.168.255.8 update-source Loopback0
+ neighbor 192.168.255.9 remote-as 1
+ neighbor 192.168.255.9 description iBGP peer iosxr02
+ neighbor 192.168.255.9 update-source Loopback0
+ neighbor 192.168.255.10 remote-as 1
+ neighbor 192.168.255.10 description iBGP peer nxos9k01
+ neighbor 192.168.255.10 update-source Loopback0
+ neighbor 192.168.255.11 remote-as 1
+ neighbor 192.168.255.11 description iBGP peer nxos9k02
+ neighbor 192.168.255.11 update-source Loopback0
+ !
+ address-family ipv4
+  network 192.168.255.2 mask 255.255.255.255
+  neighbor 192.168.255.1 activate
+  neighbor 192.168.255.4 activate
+  neighbor 192.168.255.5 activate
+  neighbor 192.168.255.6 activate
+  neighbor 192.168.255.7 activate
+  neighbor 192.168.255.8 activate
+  neighbor 192.168.255.9 activate
+  neighbor 192.168.255.10 activate
+  neighbor 192.168.255.11 activate
+ exit-address-family
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip route 192.168.10.0 255.255.255.0 192.168.1.1 2
+ip route vrf Mgmt-intf 10.0.0.0 255.0.0.0 10.8.38.1
+ip ssh version 2
+ip ssh pubkey-chain
+  username ansible
+   key-hash ssh-rsa 23C70B25FA2899AB2B77CC5719DDE5CA
+ip ssh server algorithm authentication publickey password
+ip scp server enable
+!
+logging trap warnings
+!

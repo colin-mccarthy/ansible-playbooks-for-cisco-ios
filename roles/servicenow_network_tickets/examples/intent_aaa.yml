@@ -1,0 +1,50 @@
+---
+- hosts: ios
+  gather_facts: no
+
+
+  vars:
+  
+    aaa_configs:
+      - aaa new-model
+      - aaa authentication login default group tacacs+ local
+      - aaa authentication enable default group tacacs+ enable
+      - aaa authorization config-commands
+      - 'aaa authorization exec default group tacacs+ local '
+      - 'aaa authorization commands 1 default group tacacs+ none ' 
+      - 'aaa authorization commands 15 default group tacacs+ none '
+      - aaa accounting exec default start-stop group tacacs+
+      - aaa accounting network default start-stop group tacacs+
+      - aaa accounting connection default start-stop group tacacs+
+      - aaa accounting system default start-stop group tacacs+
+      - aaa session-id common
+
+  tasks:
+  
+  - name: get the current aaa configs
+    ios_command:
+      commands:
+        - "show running-config full | include aaa"
+    register: get_config
+
+  - debug: var=get_config.stdout_lines
+
+  - name: set aaa configs
+    with_items: "{{ aaa_configs }}"
+    ios_config:
+      lines:
+        - "{{ item }}"
+    register: set_aaa
+
+  - name: remove aaa configs
+    when: "(get_config.stdout_lines[0] != '') and (item not in aaa_configs)"
+    with_items: "{{ get_config.stdout_lines[0] }}"
+    register: remove_aaa
+    ios_config:
+      lines:
+        - "no {{ item }}"
+
+  - name: servicenow_network_tickets
+    when: set_aaa.changed or remove_aaa.changed 
+    import_role:
+      name: servicenow_network_tickets

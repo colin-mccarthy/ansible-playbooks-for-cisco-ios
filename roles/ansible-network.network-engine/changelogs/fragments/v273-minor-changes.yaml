@@ -1,0 +1,3 @@
+---
+minor_changes:
+  - Add verify_depedent_role_version action plugin `network-engine#214 <https://github.com/ansible-network/network-engine/pull/214>`_.

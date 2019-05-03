@@ -1,0 +1,43 @@
+---
+- hosts: ios
+  gather_facts: no
+
+
+  vars:
+  
+    dns_servers:
+      - ip name-server 8.8.8.8
+      - ip name-server 8.8.4.4
+      
+      
+
+  tasks:
+  
+  - name: get the current name-server configs
+    ios_command:
+      commands:
+        - "show running-config full | include ip name-server"
+    register: get_config
+    when: 
+
+  - debug: var=get_config.stdout_lines
+
+  - name: set name-server commands
+    with_items: "{{ dns_servers }}"
+    ios_config:
+      lines:
+        - "{{ item }}"
+    register: set_dns
+
+  - name: remove name-server commands
+    when: "(get_config.stdout_lines[0] != '') and (item not in dns_servers)"
+    with_items: "{{ get_config.stdout_lines[0] }}"
+    register: remove_dns
+    ios_config:
+      lines:
+        - "no {{ item }}"
+
+  - name: servicenow_network_tickets
+    when: set_dns.changed or remove_dns.changed 
+    import_role:
+      name: servicenow_network_tickets

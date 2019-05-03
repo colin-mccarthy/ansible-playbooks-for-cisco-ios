@@ -1,0 +1,11 @@
+---
+- name: test failed validate_role_spec
+  validate_role_spec:
+    spec: failedtest.yaml
+  ignore_errors: true
+  register: result
+
+- assert:
+    that:
+      - "result.failed == true"
+      - "'missing required field in specification file: argument_spec' in result.msg"

@@ -1,0 +1,5 @@
+---
+bugfixes:
+  - Fix native type conversion in json_template `network-engine#154 <https://github.com/ansible-network/network-engine/pull/154>`_.
+  - Fix templating repeat_for `network-engine#190 <https://github.com/ansible-network/network-engine/pull/190>`_.
+  - Add missing boilerplate for net_facts module `network-engine#194 <https://github.com/ansible-network/network-engine/pull/194>`_.
