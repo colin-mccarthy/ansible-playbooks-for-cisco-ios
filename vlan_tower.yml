@@ -18,6 +18,8 @@
          commands: 
            - show run int {{ interface }}          
        register: int
+       
+     - debug: var=int.stdout_lines 
 
      - name: Add interfaces to VLAN
        ios_vlan:
