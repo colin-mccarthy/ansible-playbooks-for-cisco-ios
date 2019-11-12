@@ -12,6 +12,12 @@
          vlan_id: "{{ vlan }}"
          name: test-vlan
          state: present
+         
+     - name: Verify VLAN
+       ios_command:
+         commands: 
+           - show run int {{ interface }}          
+       register: int
 
      - name: Add interfaces to VLAN
        ios_vlan:
