@@ -1,0 +1,8 @@
+---
+- hosts: ios
+  
+  
+  tasks:
+      - name: Ensure the end devices are reachable
+        net_ping:
+            dest: "{{ hostvars[inventory_hostname]['ansible_host'] }}"
