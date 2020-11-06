@@ -1,7 +1,9 @@
 # Ansible-Playbooks-for-Cisco-IOS
+<code><img height="22" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/ansible.svg"></code>
+<code><img height="22" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/cisco.svg"></code>
 
 
-Mission
+Mission:
 
 Ansible-Playbooks-for-Cisco-IOS is a repository of Ansible Playbooks for Cisco IOS devices.
 
