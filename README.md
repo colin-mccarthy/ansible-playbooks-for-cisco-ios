@@ -1,6 +1,4 @@
 # Ansible-Playbooks-for-Cisco-IOS
-<code><img height="22" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/ansible.svg"></code>
-<code><img height="22" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/cisco.svg"></code>
 
 
 Mission:
