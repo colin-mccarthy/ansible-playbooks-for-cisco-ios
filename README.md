@@ -15,7 +15,7 @@ To use, download the .zip and extract the contents or clone the repository by ty
 
 Your host vars should look something like this if you're using Ansible >= 2.5
 
-```
+```yaml
 
 
 ansible_pass=foo
